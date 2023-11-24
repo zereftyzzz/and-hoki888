@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="daee8beb-d4a3-4f35-a57d-941052450c2e" name="Changes" comment="Main Activity">
+      <change afterPath="$PROJECT_DIR$/ProjectAkhir_Buddys/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectAkhir_Buddys/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectAkhir_Buddys/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectAkhir_Buddys/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectAkhir_Buddys/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjectAkhir_Buddys/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.gradle/8.0/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.gradle/8.0/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectAkhir_Buddys/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>
