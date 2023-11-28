@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "612718636472",
+    "project_id": "paba-buddy-s",
+    "storage_bucket": "paba-buddy-s.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612718636472:android:949e777fb52626f881f34d",
+        "android_client_info": {
+          "package_name": "uts.c14210184.projectakhir_buddys"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeq5of-YdTFkxrlRpfMebgk9V90YtKLRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
