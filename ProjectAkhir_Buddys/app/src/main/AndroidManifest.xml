@@ -13,10 +13,10 @@
         android:theme="@style/Theme.ProjectAkhir_Buddys"
         tools:targetApi="31">
         <activity
-            android:name=".Welcome"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Welcome"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

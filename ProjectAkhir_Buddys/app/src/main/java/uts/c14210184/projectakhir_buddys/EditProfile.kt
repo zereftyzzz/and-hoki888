@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.FragmentManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +28,22 @@ class EditProfile : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val mFragmentManager : FragmentManager = parentFragmentManager
+
+        //        Ke Fragment Profile
+        val _btnSave = view.findViewById<Button>(R.id.btnSaveEdit)
+        _btnSave.setOnClickListener{
+            val mProfile = Profile()
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mProfile, Profile::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
         }
     }
 
