@@ -18,7 +18,6 @@
 
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:colorFilter="#88000000"
          />
 
     <androidx.cardview.widget.CardView

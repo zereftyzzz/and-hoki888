@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F5F9"
-    tools:context=".Profile">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".EditProfile">
 
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="415dp"
-        android:layout_height="340dp"
+        android:layout_height="290dp"
         android:layout_marginTop="-50dp"
         android:translationZ="-90dp"
         app:cardCornerRadius="60dp"
@@ -31,7 +30,7 @@
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="70dp"
         app:cardCornerRadius="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,38 +45,36 @@
             tools:src="@tools:sample/avatars" />
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Profile Name"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+    <EditText
+        android:id="@+id/etProfileImage"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="120dp"
+        android:hint="Profile Image URL"
+        android:inputType="textUri"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <EditText
+        android:id="@+id/etProfileName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:hint="Profile Name"
+        app:layout_constraintTop_toBottomOf="@+id/etProfileImage"
+        tools:layout_editor_absoluteX="20dp" />
 
     <Button
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnSaveEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/black"
-        android:text="Edit Profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMyPost"
-        android:layout_width="374dp"
-        android:layout_height="450dp"
-        android:layout_marginBottom="20dp"
+        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
