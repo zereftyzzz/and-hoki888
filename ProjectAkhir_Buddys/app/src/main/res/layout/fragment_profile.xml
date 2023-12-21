@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#8C8C9F" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -74,10 +75,25 @@
         android:id="@+id/rvMyPost"
         android:layout_width="374dp"
         android:layout_height="450dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+    <TextView
+        android:id="@+id/Mypost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My post"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rvMyPost"
+        app:layout_constraintEnd_toEndOf="@+id/rvMyPost"
+        app:layout_constraintStart_toStartOf="@+id/rvMyPost"
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
