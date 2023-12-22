@@ -1,5 +1,6 @@
 package uts.c14210184.projectakhir_buddys
 
+import uts.c14210184.projectakhir_buddys.AdapterArticle
 import android.content.ContentValues.TAG
 import android.content.DialogInterface
 import android.content.Intent
@@ -29,7 +30,7 @@ class Article : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _rvArticle = view.findViewById(R.id.rvArticle)
-        _rvArticle.adapter = AdapterArticle(dataArticle)
+        _rvArticle.layoutManager = LinearLayoutManager(requireContext()) // Set layout manager here
 
         readData()
     }
@@ -50,14 +51,12 @@ class Article : Fragment() {
                     dataArticle.add(articleData)
                 }
 
-                val adapter = AdapterArticle(dataArticle)
-
+                // Only set the adapter once, after data retrieval
                 _rvArticle.adapter = AdapterArticle(dataArticle)
-                _rvArticle.layoutManager = LinearLayoutManager(requireContext()) // Add layout manager
-
 
                 // Notify the adapter that the data set has changed
-                adapter.notifyDataSetChanged()
+                _rvArticle.adapter?.notifyDataSetChanged() // Use _rvArticle.adapter here
+                val adapter = AdapterArticle(dataArticle)
 
                 adapter.setOnItemClickCallback(object : AdapterArticle.OnItemClickCallback {
                     override fun onItemClicked(data: ArticleData) {
