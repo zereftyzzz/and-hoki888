@@ -1,26 +1,81 @@
 package uts.c14210184.projectakhir_buddys
 
+import android.content.ContentValues.TAG
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Article.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Article : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
+    private val db = FirebaseFirestore.getInstance()
+    private var dataArticle = ArrayList<ArticleData>()
+    private lateinit var _rvArticle: RecyclerView
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _rvArticle = view.findViewById(R.id.rvArticle)
+        _rvArticle.adapter = AdapterArticle(dataArticle)
+
+        readData()
+    }
+
+    private fun readData() {
+        db.collection("article")
+            .get()
+            .addOnSuccessListener { result ->
+                dataArticle.clear()
+                for (document in result) {
+                    val articleData = ArticleData(
+                        document.getString("title") ?: "",
+                        document.getString("description") ?: "",
+                        document.getString("author") ?: "",
+                        document.getString("image") ?: "",
+                        (document.getLong("view") ?: 0).toInt()
+                    )
+                    dataArticle.add(articleData)
+                }
+
+                val adapter = AdapterArticle(dataArticle)
+
+                _rvArticle.adapter = AdapterArticle(dataArticle)
+                _rvArticle.layoutManager = LinearLayoutManager(requireContext()) // Add layout manager
+
+
+                // Notify the adapter that the data set has changed
+                adapter.notifyDataSetChanged()
+
+                adapter.setOnItemClickCallback(object : AdapterArticle.OnItemClickCallback {
+                    override fun onItemClicked(data: ArticleData) {
+                        val intent = Intent(requireContext(), DetArticle::class.java)
+                        intent.putExtra("kirimData", data)
+                        startActivity(intent)
+                    }
+
+
+                })
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+                // Handle the failure scenario or log the error
+                Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
+            }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,27 +83,16 @@ class Article : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_article, container, false)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Article.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Article().apply {

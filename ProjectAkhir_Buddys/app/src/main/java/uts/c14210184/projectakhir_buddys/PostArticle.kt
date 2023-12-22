@@ -37,7 +37,7 @@ class PostArticle : Fragment() {
     lateinit var _etAuthor : EditText
     lateinit var _etImage : EditText
 
-    var dataArticle = ArrayList<ArticleData>()
+//    var dataArticle = ArrayList<ArticleData>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,25 +89,6 @@ class PostArticle : Fragment() {
                     "Error adding document",
                     e
                 )
-            }
-    }
-
-    fun ReadData(){
-        db.collection("article")
-            .get()
-            .addOnSuccessListener {
-                    result ->
-                dataArticle.clear()
-                for (document in result){
-                    val hasil = ArticleData (
-                        document.data.get("title").toString(),
-                        document.data.get("description").toString(),
-                        document.data.get("author").toString(),
-                        document.data.get("image").toString(),
-                        document.data.get("view") as Int
-                    )
-                    dataArticle.add(hasil)
-                }
             }
     }
 
