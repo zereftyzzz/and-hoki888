@@ -55,6 +55,11 @@ class Catalogue : Fragment() {
         _rvCatalogue.layoutManager = LinearLayoutManager(requireContext())
 
         readData()
+
+        val layoutManager = GridLayoutManager(requireContext(), 2) // 2 columns
+        _rvCatalogue.layoutManager = layoutManager
+        val adapter = AdapterCatalogue(dataCatalogue)
+        _rvCatalogue.adapter = adapter
     }
 
     private fun readData() {
