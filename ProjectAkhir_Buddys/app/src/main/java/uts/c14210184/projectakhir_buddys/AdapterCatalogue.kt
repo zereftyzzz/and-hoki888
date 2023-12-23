@@ -16,6 +16,7 @@ class AdapterCatalogue( private val listCatalogue: ArrayList<CatalogueData>) :
             var _tvName: TextView = itemView.findViewById(R.id.item_name)
             var _tvCategories: TextView = itemView.findViewById(R.id.item_categories)
             var _ivCatalogue: ImageView = itemView.findViewById(R.id.ivCatalogue)
+            var _ivBgcard: ImageView = itemView.findViewById(R.id.ivBg)
 
             init {
                 itemView.setOnClickListener {
@@ -45,19 +46,17 @@ class AdapterCatalogue( private val listCatalogue: ArrayList<CatalogueData>) :
         holder._tvName.setText(catalogue.item)
 //        holder._ivCatalogue.setImageResource(catalogue.gambar)
         holder._tvCategories.setText(catalogue.categories)
-
+        holder._ivBgcard.setImageResource(R.drawable.bgcard)
+//        ImageCatalogue
         val resourceId = holder.itemView.context.resources.getIdentifier(
             catalogue.gambar, "drawable", holder.itemView.context.packageName
         )
-
-        // Check if the resource ID is valid, then set the image resource
         if (resourceId != 0) {
             holder._ivCatalogue.setImageResource(resourceId)
         } else {
-            // Handle case where resource ID is not found (optional)
-            // You can set a default image or handle it as needed
             holder._ivCatalogue.setImageResource(R.drawable.bajup)
         }
+
     }
 
     interface OnItemClickCallback {

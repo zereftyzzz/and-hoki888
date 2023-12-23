@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/ivCatalogue"
+        android:id="@+id/ivBg"
         android:layout_width="201dp"
         android:layout_height="261dp"
         android:layout_marginStart="16dp"
@@ -16,14 +16,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/ivCatalogue"
         android:layout_width="119dp"
         android:layout_height="153dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/bajup"
-        app:layout_constraintStart_toStartOf="@+id/ivCatalogue"
-        app:layout_constraintTop_toTopOf="@+id/ivCatalogue" />
+        app:layout_constraintStart_toStartOf="@+id/ivBg"
+        app:layout_constraintTop_toTopOf="@+id/ivBg" />
 
     <TextView
         android:id="@+id/item_name"
@@ -33,8 +33,8 @@
         android:text="Adidas 2023 Tee"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/imageView11"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+        app:layout_constraintStart_toStartOf="@+id/ivCatalogue"
+        app:layout_constraintTop_toBottomOf="@+id/ivCatalogue" />
 
     <TextView
         android:id="@+id/item_categories"
