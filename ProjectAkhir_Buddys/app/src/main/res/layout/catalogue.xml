@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivCatalogue"
         android:layout_width="201dp"
         android:layout_height="261dp"
         android:layout_marginStart="16dp"
@@ -22,8 +22,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/bajup"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintStart_toStartOf="@+id/ivCatalogue"
+        app:layout_constraintTop_toTopOf="@+id/ivCatalogue" />
 
     <TextView
         android:id="@+id/item_name"

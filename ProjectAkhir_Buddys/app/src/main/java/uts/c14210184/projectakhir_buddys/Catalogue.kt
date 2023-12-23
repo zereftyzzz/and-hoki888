@@ -1,10 +1,17 @@
 package uts.c14210184.projectakhir_buddys
 
+import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +27,9 @@ class Catalogue : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private val db = FirebaseFirestore.getInstance()
+    private var dataCatalogue = ArrayList<CatalogueData>()
+    private lateinit var _rvCatalogue: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +47,47 @@ class Catalogue : Fragment() {
         return inflater.inflate(R.layout.fragment_catalogue, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
+        _rvCatalogue = view.findViewById(R.id.rvCatalogue)
+        _rvCatalogue.layoutManager = LinearLayoutManager(requireContext())
+
+        readData()
+    }
+
+    private fun readData() {
+        db.collection("catalogue")
+            .get()
+            .addOnSuccessListener { result ->
+                dataCatalogue.clear()
+                for (document in result) {
+                    val catalogueData = CatalogueData(
+                        document.getString("image") ?: "",
+                        document.getString("name") ?: "",
+                        document.getString("categories") ?: "",
+                    )
+                    dataCatalogue.add(catalogueData)
+                }
+
+                Log.d("CatalogueFragment", "Data Retrieved: ${dataCatalogue.size}") // Log the size of the data
+                val adapter = AdapterCatalogue(dataCatalogue)
+                _rvCatalogue.adapter = adapter
+                adapter.notifyDataSetChanged()
+
+                adapter.setOnItemClickCallback(object : AdapterCatalogue.OnItemClickCallback {
+                    override fun onItemClicked(data: CatalogueData) {
+                        val intent = Intent(requireContext(), DetArticle::class.java)
+                        intent.putExtra("kirimData", data)
+                        startActivity(intent)
+                    }
+                })
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+                // Handle the failure scenario or log the error
+                Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
+            }
     }
 
     companion object {
@@ -60,4 +109,8 @@ class Catalogue : Fragment() {
                 }
             }
     }
+}
+
+private fun Intent.putExtra(s: String, data: CatalogueData) {
+
 }

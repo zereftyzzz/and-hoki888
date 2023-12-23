@@ -53,6 +53,11 @@ class AdapterArticle(private val listArticle: ArrayList<ArticleData>) :
         // holder._ivArticle.setImageResource(article.image)
     }
 
+    fun updateData(newList: ArrayList<ArticleData>) {
+        listArticle.clear()
+        listArticle.addAll(newList)
+        notifyDataSetChanged()
+    }
     interface OnItemClickCallback {
         fun onItemClicked(data: ArticleData)
 //        fun delData(pos: Int)
