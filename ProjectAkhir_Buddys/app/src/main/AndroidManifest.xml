@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ProjectAkhir_Buddys"
         tools:targetApi="31">
         <activity
+            android:name=".DetCatalogue"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

@@ -32,6 +32,7 @@ class Catalogue : Fragment() {
     private var dataCatalogue = ArrayList<CatalogueData>()
     private lateinit var _rvCatalogue: RecyclerView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -55,11 +56,19 @@ class Catalogue : Fragment() {
         _rvCatalogue.layoutManager = LinearLayoutManager(requireContext())
 
         readData()
-        
+
         val layoutManager = GridLayoutManager(requireContext(), 2) // 2 columns
         _rvCatalogue.layoutManager = layoutManager
         val adapter = AdapterCatalogue(dataCatalogue)
         _rvCatalogue.adapter = adapter
+
+        adapter.setOnItemClickCallback(object : AdapterCatalogue.OnItemClickCallback {
+            override fun onItemClicked(data: CatalogueData) {
+                val intent = Intent(requireContext(), DetCatalogue::class.java)
+                intent.putExtra("kirimData", data)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun readData() {
@@ -81,13 +90,13 @@ class Catalogue : Fragment() {
                 _rvCatalogue.adapter = adapter
                 adapter.notifyDataSetChanged()
 
-                adapter.setOnItemClickCallback(object : AdapterCatalogue.OnItemClickCallback {
-                    override fun onItemClicked(data: CatalogueData) {
-                        val intent = Intent(requireContext(), DetArticle::class.java)
-                        intent.putExtra("kirimData", data)
-                        startActivity(intent)
-                    }
-                })
+//                adapter.setOnItemClickCallback(object : AdapterCatalogue.OnItemClickCallback {
+//                    override fun onItemClicked(data: CatalogueData) {
+//                        val intent = Intent(requireContext(), DetCatalogue::class.java)
+//                        intent.putExtra("kirimData", data)
+//                        startActivity(intent)
+//                    }
+//                })
             }
             .addOnFailureListener { exception ->
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)
