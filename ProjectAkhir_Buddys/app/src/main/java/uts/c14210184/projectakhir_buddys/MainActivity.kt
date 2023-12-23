@@ -13,62 +13,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        Fragment Catalogue sebagai tampilan awal
-        val mFragmentmanager = supportFragmentManager
-        val mCatalogue = Catalogue()
-        mFragmentmanager.findFragmentByTag(mCatalogue::class.java.simpleName)
-        mFragmentmanager
-            .beginTransaction()
-            .add(R.id.frameContainer, mCatalogue, Catalogue::class.java.simpleName)
+        val fragmentManager = supportFragmentManager
+
+        val catalogueFragment = Catalogue()
+        fragmentManager.beginTransaction()
+            .replace(R.id.frameContainer, catalogueFragment, Catalogue::class.java.simpleName)
             .commit()
 
-        //        Fragment Catalogue
-        var _btnCatalogue = findViewById<ImageView>(R.id.Btn_Home)
-        _btnCatalogue.setOnClickListener {
-            mFragmentmanager.findFragmentByTag(mCatalogue::class.java.simpleName)
-            mFragmentmanager
-                .beginTransaction()
-                .replace(R.id.frameContainer, mCatalogue, Catalogue::class.java.simpleName)
+        findViewById<ImageView>(R.id.Btn_Home).setOnClickListener {
+            fragmentManager.beginTransaction()
+                .replace(R.id.frameContainer, catalogueFragment, Catalogue::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
         }
 
-        //        Fragment Article
-        val mArticle = Article()
-        var _btnArticle = findViewById<ImageView>(R.id.Btn_Article)
-        _btnArticle.setOnClickListener {
-            mFragmentmanager.findFragmentByTag(mArticle::class.java.simpleName)
-            mFragmentmanager
-                .beginTransaction()
-                .replace(R.id.frameContainer, mArticle, Article::class.java.simpleName)
+        val articleFragment = Article()
+        findViewById<ImageView>(R.id.Btn_Article).setOnClickListener {
+            fragmentManager.beginTransaction()
+                .replace(R.id.frameContainer, articleFragment, Article::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
         }
 
-        //        Fragment Post
-        val mPost = PostArticle()
-        var _btnPost = findViewById<ImageView>(R.id.Btn_Plus)
-        _btnPost.setOnClickListener {
-            mFragmentmanager.findFragmentByTag(mPost::class.java.simpleName)
-            mFragmentmanager
-                .beginTransaction()
-                .replace(R.id.frameContainer, mPost, PostArticle::class.java.simpleName)
+        val postFragment = PostArticle()
+        findViewById<ImageView>(R.id.Btn_Plus).setOnClickListener {
+            fragmentManager.beginTransaction()
+                .replace(R.id.frameContainer, postFragment, PostArticle::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
         }
 
-        //        Fragment Profile
-        val mProfile = Profile()
-        var _btnProfile = findViewById<ImageView>(R.id.Btn_Profile)
-        _btnProfile.setOnClickListener {
-            mFragmentmanager.findFragmentByTag(mProfile::class.java.simpleName)
-            mFragmentmanager
-                .beginTransaction()
-                .replace(R.id.frameContainer, mProfile, Profile::class.java.simpleName)
+        val profileFragment = Profile()
+        findViewById<ImageView>(R.id.Btn_Profile).setOnClickListener {
+            fragmentManager.beginTransaction()
+                .replace(R.id.frameContainer, profileFragment, Profile::class.java.simpleName)
                 .addToBackStack(null)
                 .commit()
         }
     }
-
-
 }

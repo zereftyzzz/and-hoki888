@@ -67,7 +67,7 @@ class PostArticle : Fragment() {
     }
 
 //    Firebase
-//
+
     fun TambahData(Title : String, Description : String, Author: String, Image: String){
         var View = Random.nextInt(20,900)
         val dataBaru = ArticleData(Author, Description, Image, Title, View)

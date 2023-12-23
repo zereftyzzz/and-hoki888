@@ -3,7 +3,6 @@ package uts.c14210184.projectakhir_buddys
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -51,13 +50,20 @@ class AdapterArticle(private val listArticle: ArrayList<ArticleData>) :
         holder._tvView.text = article.view.toString()
         // Set image using appropriate method based on your image source
         // holder._ivArticle.setImageResource(article.image)
+        val resourceId = holder.itemView.context.resources.getIdentifier(
+            article.image, "drawable", holder.itemView.context.packageName
+        )
+
+        // Check if the resource ID is valid, then set the image resource
+        if (resourceId != 0) {
+            holder._ivArticle.setImageResource(resourceId)
+        } else {
+            // Handle case where resource ID is not found (optional)
+            // You can set a default image or handle it as needed
+            holder._ivArticle.setImageResource(R.drawable.bajup)
+        }
     }
 
-    fun updateData(newList: ArrayList<ArticleData>) {
-        listArticle.clear()
-        listArticle.addAll(newList)
-        notifyDataSetChanged()
-    }
     interface OnItemClickCallback {
         fun onItemClicked(data: ArticleData)
 //        fun delData(pos: Int)

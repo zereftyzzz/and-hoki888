@@ -31,11 +31,13 @@
         android:id="@+id/tvTitles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Adidas 2023 Tee"
         android:textSize="40sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="321dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivDetCatalogue" />
 
     <TextView
         android:id="@+id/tvCategories"

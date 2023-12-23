@@ -1,6 +1,7 @@
 package uts.c14210184.projectakhir_buddys
 
 import android.content.ContentValues.TAG
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,97 +27,6 @@ class Article : Fragment() {
     private var dataArticle = ArrayList<ArticleData>()
     private lateinit var _rvArticle: RecyclerView
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        _rvArticle = view.findViewById(R.id.rvArticle)
-//        _rvArticle.adapter = AdapterArticle(dataArticle)
-//
-//        readData()
-        _rvArticle = view.findViewById(R.id.rvArticle)
-        _rvArticle.layoutManager = LinearLayoutManager(requireContext())
-
-        readData()
-
-
-    }
-
-//    private fun readData() {
-//        db.collection("article")
-//            .get()
-//            .addOnSuccessListener {
-//                    result ->
-//                dataArticle.clear()
-//                for (document in result) {
-//                    val articleData = ArticleData(
-//                        document.getString("title") ?: "",
-//                        document.getString("description") ?: "",
-//                        document.getString("author") ?: "",
-//                        document.getString("image") ?: "",
-//                        (document.getLong("view") ?: 0).toInt()
-//                    )
-//                    dataArticle.add(articleData)
-//                }
-//                _rvArticle.adapter?.notifyDataSetChanged()
-//
-//                val adapter = AdapterArticle(dataArticle)
-//
-//                _rvArticle.adapter = AdapterArticle(dataArticle)
-//                _rvArticle.layoutManager = LinearLayoutManager(requireContext()) // Add layout manager
-//
-//
-//
-//                adapter.setOnItemClickCallback(object : AdapterArticle.OnItemClickCallback {
-//                    override fun onItemClicked(data: ArticleData) {
-//                        val intent = Intent(requireContext(), DetArticle::class.java)
-//                        intent.putExtra("kirimData", data)
-//                        startActivity(intent)
-//                    }
-//
-//
-//                })
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents: ", exception)
-//                // Handle the failure scenario or log the error
-//                Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
-//            }
-//    }
-
-    private fun readData() {
-        db.collection("article")
-            .get()
-            .addOnSuccessListener { result ->
-                dataArticle.clear()
-                for (document in result) {
-                    val articleData = ArticleData(
-                        document.getString("title") ?: "",
-                        document.getString("description") ?: "",
-                        document.getString("author") ?: "",
-                        document.getString("image") ?: "",
-                        (document.getLong("view") ?: 0).toInt()
-                    )
-                    dataArticle.add(articleData)
-                }
-
-                val adapter = AdapterArticle(dataArticle)
-                _rvArticle.adapter = adapter
-                adapter.notifyDataSetChanged()
-
-                adapter.setOnItemClickCallback(object : AdapterArticle.OnItemClickCallback {
-                    override fun onItemClicked(data: ArticleData) {
-                        val intent = Intent(requireContext(), DetArticle::class.java)
-                        intent.putExtra("kirimData", data)
-                        startActivity(intent)
-                    }
-                })
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-                // Handle the failure scenario or log the error
-                Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
-            }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -128,6 +40,57 @@ class Article : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_article, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _rvArticle = view.findViewById(R.id.rvArticle)
+        _rvArticle.adapter = AdapterArticle(dataArticle)
+
+        readData()
+
+        val layoutManager = LinearLayoutManager(requireContext()) // 1 columns
+        _rvArticle.layoutManager = layoutManager
+        val adapter = AdapterArticle(dataArticle)
+        _rvArticle.adapter = adapter
+
+        adapter.setOnItemClickCallback(object : AdapterArticle.OnItemClickCallback {
+            override fun onItemClicked(data: ArticleData) {
+                val intent = Intent(requireContext(), DetArticle::class.java)
+                intent.putExtra("kirimData", data)
+                startActivity(intent)
+            }
+
+        })
+    }
+
+    private fun readData() {
+        db.collection("article")
+            .get()
+            .addOnSuccessListener {
+                    result ->
+                dataArticle.clear()
+                for (document in result) {
+                    val articleData = ArticleData(
+                        document.getString("title") ?: "",
+                        document.getString("description") ?: "",
+                        document.getString("author") ?: "",
+                        document.getString("image") ?: "",
+                        (document.getLong("view") ?: 0).toInt()
+                    )
+                    dataArticle.add(articleData)
+                }
+
+                Log.d("Article Fragment", "Data Retrieved: ${dataArticle.size}") // Log the size of the data
+                val adapter = AdapterArticle(dataArticle)
+                _rvArticle.adapter = adapter
+                adapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+                // Handle the failure scenario or log the error
+                Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
+            }
     }
 
     companion object {

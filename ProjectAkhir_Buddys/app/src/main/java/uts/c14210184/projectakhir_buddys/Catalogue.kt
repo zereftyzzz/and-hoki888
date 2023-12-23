@@ -64,7 +64,8 @@ class Catalogue : Fragment() {
 
         adapter.setOnItemClickCallback(object : AdapterCatalogue.OnItemClickCallback {
             override fun onItemClicked(data: CatalogueData) {
-                val intent = Intent(requireContext(), DetCatalogue::class.java)
+//                Toast.makeText(requireContext(), data.item, Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity, DetCatalogue::class.java)
                 intent.putExtra("kirimData", data)
                 startActivity(intent)
             }

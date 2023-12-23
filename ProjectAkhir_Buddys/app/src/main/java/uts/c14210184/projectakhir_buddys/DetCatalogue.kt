@@ -10,6 +10,7 @@ class DetCatalogue : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_det_catalogue)
+
         val _ivDetCatalogue = findViewById<ImageView>(R.id.ivDetCatalogue)
         val _tvDescription = findViewById<TextView>(R.id.tvDescription)
         val _tvCategories = findViewById<TextView>(R.id.tvCategories)
@@ -29,8 +30,5 @@ class DetCatalogue : AppCompatActivity() {
         Picasso.get().load(imageRes).into(_ivDetCatalogue)
         _tvTitles.setText(dataIntent!!.item)
         _tvCategories.setText(dataIntent!!.categories)
-
-
-
     }
 }
