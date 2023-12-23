@@ -1,3 +1,5 @@
+// AdapterCatalogue.kt
+
 package uts.c14210184.projectakhir_buddys
 
 import android.view.LayoutInflater
@@ -5,28 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterCatalogue( private val listCatalogue: ArrayList<CatalogueData>) :
-    RecyclerView.Adapter<AdapterCatalogue.ListViewHolder>(){
-
-//        private lateinit var onItemClickCallback: AdapterCatalogue.OnItemClickCallback
-    private lateinit var onItemClickCallback: OnItemClickCallback
+class AdapterCatalogue(
+    private val listCatalogue: ArrayList<CatalogueData>,
+    private val onItemClickCallback: (CatalogueData) -> Unit
+) : RecyclerView.Adapter<AdapterCatalogue.ListViewHolder>() {
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            var _tvName: TextView = itemView.findViewById(R.id.item_name)
-            var _tvCategories: TextView = itemView.findViewById(R.id.item_categories)
-            var _ivCatalogue: ImageView = itemView.findViewById(R.id.ivCatalogue)
-//            var _ivBgcard: ImageView = itemView.findViewById(R.id.ivBg)
-
-//            init {
-//                itemView.setOnClickListener {
-//                    onItemClickCallback.onItemClicked(listCatalogue[adapterPosition])
-//                }
-//            }
-        }
+        var _tvName: TextView = itemView.findViewById(R.id.item_name)
+        var _tvCategories: TextView = itemView.findViewById(R.id.item_categories)
+        var _ivCatalogue: ImageView = itemView.findViewById(R.id.ivCatalogue)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context)
@@ -35,23 +27,15 @@ class AdapterCatalogue( private val listCatalogue: ArrayList<CatalogueData>) :
     }
 
     override fun getItemCount(): Int {
-        return if (listCatalogue.isNotEmpty()) {
-            listCatalogue.size
-        } else {
-            // Handle the empty list case, e.g., display a message
-            0  // Return 0 to indicate an empty list
-        }
+        return listCatalogue.size
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val catalogue = listCatalogue[position]
 
-        holder._tvName.setText(catalogue.item)
-//        holder._ivCatalogue.setImageResource(catalogue.gambar)
-        holder._tvCategories.setText(catalogue.categories)
-//        holder._ivBgcard.setImageResource(R.drawable.bgcard)
-//        ImageCatalogue
-        val context = holder.itemView.context
+        holder._tvName.text = catalogue.item
+        holder._tvCategories.text = catalogue.categories
+
         val resourceId = holder.itemView.context.resources.getIdentifier(
             catalogue.gambar, "drawable", holder.itemView.context.packageName
         )
@@ -60,23 +44,9 @@ class AdapterCatalogue( private val listCatalogue: ArrayList<CatalogueData>) :
         } else {
             holder._ivCatalogue.setImageResource(R.drawable.bajup)
         }
-        holder._ivCatalogue.setOnClickListener {
-//            Toast.makeText(holder.itemView.context, catalogue.item, Toast.LENGTH_SHORT).show()
 
-            onItemClickCallback.onItemClicked(listCatalogue[position])
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.invoke(listCatalogue[position])
         }
-
-
-
     }
-
-    interface OnItemClickCallback {
-        fun onItemClicked(data: CatalogueData)
-//        fun delData(pos: Int)
-    }
-
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-
 }
