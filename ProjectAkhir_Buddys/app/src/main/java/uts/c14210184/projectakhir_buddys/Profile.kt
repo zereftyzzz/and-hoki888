@@ -6,7 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
+import com.squareup.picasso.Picasso
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,6 +38,16 @@ class Profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mFragmentManager : FragmentManager = parentFragmentManager
+
+        val _tvName = view.findViewById<TextView>(R.id.tvName)
+        val _ivImage = view.findViewById<ImageView>(R.id.ivImage)
+
+        val profileImage = arguments?.getString("profileImage")
+        val profileName = arguments?.getString("profileName")
+
+        Picasso.get().load(profileImage).into(_ivImage)
+
+        _tvName.text = profileName
 
         //        Ke Fragment EditProfile
         val _btnEdit = view.findViewById<Button>(R.id.btnEdit)

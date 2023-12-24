@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.FragmentManager
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,10 +36,19 @@ class EditProfile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mFragmentManager : FragmentManager = parentFragmentManager
 
+        val _etProfileImage = view.findViewById<EditText>(R.id.etProfileImage)
+        val _etProfileName = view.findViewById<EditText>(R.id.etProfileName)
+
+
+
         //        Ke Fragment Profile
         val _btnSave = view.findViewById<Button>(R.id.btnSaveEdit)
         _btnSave.setOnClickListener{
             val mProfile = Profile()
+            val bundle = Bundle()
+            bundle.putString("profileImage", _etProfileImage.text.toString())
+            bundle.putString("profileName", _etProfileName.text.toString())
+            mProfile.arguments = bundle
             mFragmentManager.beginTransaction().apply {
                 replace(R.id.frameContainer, mProfile, Profile::class.java.simpleName)
                 addToBackStack(null)
