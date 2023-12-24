@@ -45,19 +45,9 @@ class Article : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _rvArticle = view.findViewById(R.id.rvArticle)
-        _rvArticle.adapter = AdapterArticle(dataArticle)
+        _rvArticle.layoutManager = LinearLayoutManager(requireContext())
 
         readData()
-
-//
-//        adapter.setOnItemClickCallback(object : AdapterArticle.OnItemClickCallback {
-//            override fun onItemClicked(data: ArticleData) {
-//                val intent = Intent(requireContext(), DetArticle::class.java)
-//                intent.putExtra("kirimData", data)
-//                startActivity(intent)
-//            }
-//
-//        })
     }
 
     private fun readData() {
@@ -68,10 +58,10 @@ class Article : Fragment() {
                 dataArticle.clear()
                 for (document in result) {
                     val articleData = ArticleData(
-                        document.getString("title") ?: "",
-                        document.getString("description") ?: "",
                         document.getString("author") ?: "",
+                        document.getString("description") ?: "",
                         document.getString("image") ?: "",
+                        document.getString("title") ?: "",
                         (document.getLong("view") ?: 0).toInt()
                     )
                     dataArticle.add(articleData)
@@ -82,9 +72,13 @@ class Article : Fragment() {
                 val layoutManager = LinearLayoutManager(requireContext()) // 1 columns
                 _rvArticle.layoutManager = layoutManager
 
-                val adapter = AdapterArticle(dataArticle)
+                val adapter = AdapterArticle(dataArticle) { data ->
+                    val intent = Intent(activity, DetArticle::class.java)
+                    intent.putExtra("kirimData", data)
+                    startActivity(intent)
+                }
+
                 _rvArticle.adapter = adapter
-                adapter.notifyDataSetChanged()
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)

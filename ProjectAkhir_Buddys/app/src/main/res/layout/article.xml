@@ -18,28 +18,30 @@
 
     <ImageView
         android:id="@+id/ivArticle"
-        android:layout_width="136dp"
-        android:layout_height="136dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="7dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/ivBg"
         app:layout_constraintTop_toTopOf="@+id/ivBg"
         app:srcCompat="@drawable/article1" />
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="14dp"
+        android:layout_marginEnd="10dp"
         android:text="Title"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/ivBg"
         app:layout_constraintStart_toEndOf="@+id/ivArticle"
         app:layout_constraintTop_toTopOf="@+id/ivArticle" />
 
         <TextView
-            android:id="@+id/tvBy"
+            android:id="@+id/tvDetDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -56,19 +58,29 @@
             android:text="Author"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tvBy"
-            app:layout_constraintTop_toTopOf="@+id/tvBy" />
+            app:layout_constraintStart_toEndOf="@+id/tvDetDesc"
+            app:layout_constraintTop_toTopOf="@+id/tvDetDesc" />
 
-        <TextView
-            android:id="@+id/tvView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="16dp"
-            android:text="TextView"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivArticle"
-            app:layout_constraintStart_toEndOf="@+id/ivArticle" />
+    <TextView
+        android:id="@+id/tvView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="total view"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/tvV"
+        app:layout_constraintTop_toTopOf="@+id/tvV" />
+
+    <TextView
+        android:id="@+id/tvV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="16dp"
+        android:text="views"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivArticle"
+        app:layout_constraintStart_toEndOf="@+id/ivArticle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

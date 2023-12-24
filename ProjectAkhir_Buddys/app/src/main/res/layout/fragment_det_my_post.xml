@@ -37,7 +37,7 @@
             android:padding="24dp">
 
             <TextView
-                android:id="@+id/tvTitl"
+                android:id="@+id/tvDetTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Article title"
@@ -46,7 +46,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvBy"
+                android:id="@+id/tvDetDesc"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="56dp"
