@@ -43,7 +43,12 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
+
+        val userName = intent.getStringExtra("userName")
         val profileFragment = Profile()
+        val bundle = Bundle()
+        bundle.putString("userName", userName)
+        profileFragment.arguments = bundle
         findViewById<ImageView>(R.id.Btn_Profile).setOnClickListener {
             fragmentManager.beginTransaction()
                 .replace(R.id.frameContainer, profileFragment, Profile::class.java.simpleName)

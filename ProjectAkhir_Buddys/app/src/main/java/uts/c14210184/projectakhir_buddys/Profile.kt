@@ -35,31 +35,72 @@ class Profile : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val mFragmentManager : FragmentManager = parentFragmentManager
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        val mFragmentManager : FragmentManager = parentFragmentManager
+//
+//        val userName = arguments?.getString("userName")
+//
+//        val _tvName = view.findViewById<TextView>(R.id.tvName)
+//        val _ivImage = view.findViewById<ImageView>(R.id.ivImage)
+//
+//        val profileImage = arguments?.getString("profileImage")
+//        val profileName = arguments?.getString("profileName")
+//
+//        Picasso.get().load(profileImage).into(_ivImage)
+//        _tvName.text = "$userName!"
+//        _tvName.text = profileName
+//
+//        //        Ke Fragment EditProfile
+//        val _btnEdit = view.findViewById<Button>(R.id.btnEdit)
+//        _btnEdit.setOnClickListener{
+//            val mEdit = EditProfile()
+//            mFragmentManager.beginTransaction().apply {
+//                replace(R.id.frameContainer, mEdit, EditProfile::class.java.simpleName)
+//                addToBackStack(null)
+//                commit()
+//            }
+//        }
+//    }
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    val mFragmentManager : FragmentManager = parentFragmentManager
 
-        val _tvName = view.findViewById<TextView>(R.id.tvName)
-        val _ivImage = view.findViewById<ImageView>(R.id.ivImage)
+    val userName = arguments?.getString("userName")
 
-        val profileImage = arguments?.getString("profileImage")
-        val profileName = arguments?.getString("profileName")
+    val _tvName = view.findViewById<TextView>(R.id.tvName)
+    val _ivImage = view.findViewById<ImageView>(R.id.ivImage)
 
-        Picasso.get().load(profileImage).into(_ivImage)
+    val profileImage = arguments?.getString("profileImage")
+    var profileName = arguments?.getString("profileName")
 
-        _tvName.text = profileName
+    // Set "Welcome, $userName!" if profileName is null or empty (first time use)
+    if (profileName.isNullOrEmpty()) {
+        _tvName.text = "$userName"
+    } else {
+        _tvName.text = profileName // Set profileName if available (after edit)
+    }
 
-        //        Ke Fragment EditProfile
-        val _btnEdit = view.findViewById<Button>(R.id.btnEdit)
-        _btnEdit.setOnClickListener{
-            val mEdit = EditProfile()
-            mFragmentManager.beginTransaction().apply {
-                replace(R.id.frameContainer, mEdit, EditProfile::class.java.simpleName)
-                addToBackStack(null)
-                commit()
-            }
+    Picasso.get().load(profileImage).into(_ivImage)
+
+    // Ke Fragment EditProfile
+    val _btnEdit = view.findViewById<Button>(R.id.btnEdit)
+    _btnEdit.setOnClickListener{
+        val mEdit = EditProfile()
+        // Pass profileName to EditProfile fragment
+        val bundle = Bundle().apply {
+            putString("profileName", profileName)
+        }
+        mEdit.arguments = bundle
+
+        mFragmentManager.beginTransaction().apply {
+            replace(R.id.frameContainer, mEdit, EditProfile::class.java.simpleName)
+            addToBackStack(null)
+            commit()
         }
     }
+}
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
