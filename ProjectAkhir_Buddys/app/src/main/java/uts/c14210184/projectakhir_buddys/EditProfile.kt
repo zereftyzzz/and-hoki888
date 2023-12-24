@@ -46,15 +46,31 @@ class EditProfile : Fragment() {
         _btnSave.setOnClickListener{
             val mProfile = Profile()
             val bundle = Bundle()
-            bundle.putString("profileImage", _etProfileImage.text.toString())
-            bundle.putString("profileName", _etProfileName.text.toString())
-            mProfile.arguments = bundle
-            mFragmentManager.beginTransaction().apply {
-                replace(R.id.frameContainer, mProfile, Profile::class.java.simpleName)
-                addToBackStack(null)
-                commit()
+
+            val profileImageText = _etProfileImage.text.toString().trim()
+            val profileNameText = _etProfileName.text.toString().trim()
+
+            if (profileImageText.isNotEmpty() && profileNameText.isNotEmpty()) {
+                bundle.putString("profileImage", profileImageText)
+                bundle.putString("profileName", profileNameText)
+                mProfile.arguments = bundle
+
+                mFragmentManager.beginTransaction().apply {
+                    replace(R.id.frameContainer, mProfile, Profile::class.java.simpleName)
+                    addToBackStack(null)
+                    commit()
+                }
+            } else {
+                // Handle the case where either or both fields are empty
+                if (profileImageText.isEmpty()) {
+                    _etProfileImage.error = "Please enter profile image"
+                }
+                if (profileNameText.isEmpty()) {
+                    _etProfileName.error = "Please enter profile name"
+                }
             }
         }
+
     }
 
     override fun onCreateView(
