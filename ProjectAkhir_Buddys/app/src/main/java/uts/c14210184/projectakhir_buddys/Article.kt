@@ -49,19 +49,15 @@ class Article : Fragment() {
 
         readData()
 
-        val layoutManager = LinearLayoutManager(requireContext()) // 1 columns
-        _rvArticle.layoutManager = layoutManager
-        val adapter = AdapterArticle(dataArticle)
-        _rvArticle.adapter = adapter
-
-        adapter.setOnItemClickCallback(object : AdapterArticle.OnItemClickCallback {
-            override fun onItemClicked(data: ArticleData) {
-                val intent = Intent(requireContext(), DetArticle::class.java)
-                intent.putExtra("kirimData", data)
-                startActivity(intent)
-            }
-
-        })
+//
+//        adapter.setOnItemClickCallback(object : AdapterArticle.OnItemClickCallback {
+//            override fun onItemClicked(data: ArticleData) {
+//                val intent = Intent(requireContext(), DetArticle::class.java)
+//                intent.putExtra("kirimData", data)
+//                startActivity(intent)
+//            }
+//
+//        })
     }
 
     private fun readData() {
@@ -82,13 +78,16 @@ class Article : Fragment() {
                 }
 
                 Log.d("Article Fragment", "Data Retrieved: ${dataArticle.size}") // Log the size of the data
+
+                val layoutManager = LinearLayoutManager(requireContext()) // 1 columns
+                _rvArticle.layoutManager = layoutManager
+
                 val adapter = AdapterArticle(dataArticle)
                 _rvArticle.adapter = adapter
                 adapter.notifyDataSetChanged()
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
-                // Handle the failure scenario or log the error
                 Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
             }
     }
