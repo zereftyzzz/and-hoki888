@@ -16,7 +16,6 @@ class Welcome : AppCompatActivity() {
         val btnStart = findViewById<Button>(R.id.btnStart)
         btnStart.setOnClickListener {
             val name = _etName.text.toString()
-
             val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("userName", name)
             startActivity(intent)

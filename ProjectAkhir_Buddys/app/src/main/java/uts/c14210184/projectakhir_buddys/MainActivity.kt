@@ -8,11 +8,13 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+    public var userName: String? = null
+    public var defaultImageUrl: String? = "https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        userName = intent.getStringExtra("userName")
         val fragmentManager = supportFragmentManager
 
         val catalogueFragment = Catalogue()
@@ -44,10 +46,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val userName = intent.getStringExtra("userName")
         val profileFragment = Profile()
         val bundle = Bundle()
-        bundle.putString("userName", userName)
         profileFragment.arguments = bundle
         findViewById<ImageView>(R.id.Btn_Profile).setOnClickListener {
             fragmentManager.beginTransaction()
@@ -55,5 +55,9 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+    fun setUserData(userName: String?, imageUrl: String?) {
+        this.userName = userName
+        this.defaultImageUrl = imageUrl
     }
 }

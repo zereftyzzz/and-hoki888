@@ -40,23 +40,17 @@ class Profile : Fragment() {
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val mFragmentManager : FragmentManager = parentFragmentManager
+    val mainActivity = activity as? MainActivity
 
-    val userName = arguments?.getString("userName")
+    val userName = mainActivity?.userName
+    val defaultImageUrl = mainActivity?.defaultImageUrl
 
     val _tvName = view.findViewById<TextView>(R.id.tvName)
     val _ivImage = view.findViewById<ImageView>(R.id.ivImage)
 
-    val profileImage = arguments?.getString("profileImage")
-    var profileName = arguments?.getString("profileName")
+    Picasso.get().load(defaultImageUrl).into(_ivImage)
+    _tvName.text = userName
 
-    // Set "Welcome, $userName!" if profileName is null or empty (first time use)
-    if (profileName.isNullOrEmpty()) {
-        _tvName.text = "$userName"
-    } else {
-        _tvName.text = profileName // Set profileName if available (after edit)
-    }
-
-    Picasso.get().load(profileImage).into(_ivImage)
 
     // Ke Fragment EditProfile
     val _btnEdit = view.findViewById<Button>(R.id.btnEdit)
@@ -64,7 +58,6 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val mEdit = EditProfile()
         // Pass profileName to EditProfile fragment
         val bundle = Bundle().apply {
-            putString("profileName", profileName)
         }
         mEdit.arguments = bundle
 

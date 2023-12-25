@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="daee8beb-d4a3-4f35-a57d-941052450c2e" name="Changes" comment="Main Activity" />
+    <list default="true" id="daee8beb-d4a3-4f35-a57d-941052450c2e" name="Changes" comment="Main Activity">
+      <change beforePath="$PROJECT_DIR$/ProjectAkhir_Buddys/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectAkhir_Buddys/.idea/misc.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,7 +32,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "D:/ANDROID/UAS2/ProjectAkhir_Buddys"
+    "last_opened_file_path": "D:/ANDROID/UAS3/ProjectAkhir_Buddys"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
