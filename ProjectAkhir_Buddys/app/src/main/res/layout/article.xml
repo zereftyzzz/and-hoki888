@@ -50,37 +50,37 @@
             app:layout_constraintStart_toStartOf="@+id/tvTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-        <TextView
-            android:id="@+id/tvAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Author"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tvDetDesc"
-            app:layout_constraintTop_toTopOf="@+id/tvDetDesc" />
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="Author"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvDetDesc"
+        app:layout_constraintTop_toTopOf="@+id/tvDetDesc" />
 
     <TextView
         android:id="@+id/tvView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="total view"
+        android:layout_marginBottom="16dp"
+        android:text="100"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/tvV"
-        app:layout_constraintTop_toTopOf="@+id/tvV" />
+        app:layout_constraintBottom_toBottomOf="@+id/ivArticle"
+        app:layout_constraintStart_toEndOf="@+id/ivArticle" />
 
     <TextView
         android:id="@+id/tvV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="6dp"
         android:text="views"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivArticle"
-        app:layout_constraintStart_toEndOf="@+id/ivArticle" />
+        app:layout_constraintStart_toEndOf="@+id/tvView"
+        app:layout_constraintTop_toTopOf="@+id/tvView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

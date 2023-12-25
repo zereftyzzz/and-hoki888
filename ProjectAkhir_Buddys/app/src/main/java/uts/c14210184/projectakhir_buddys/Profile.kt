@@ -1,6 +1,9 @@
 package uts.c14210184.projectakhir_buddys
 
+import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,24 +11,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Profile.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Profile : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private val db = FirebaseFirestore.getInstance()
+    private var dataArticle = ArrayList<ArticleData>()
+    private lateinit var _rvMyPost: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,33 +37,6 @@ class Profile : Fragment() {
         }
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        val mFragmentManager : FragmentManager = parentFragmentManager
-//
-//        val userName = arguments?.getString("userName")
-//
-//        val _tvName = view.findViewById<TextView>(R.id.tvName)
-//        val _ivImage = view.findViewById<ImageView>(R.id.ivImage)
-//
-//        val profileImage = arguments?.getString("profileImage")
-//        val profileName = arguments?.getString("profileName")
-//
-//        Picasso.get().load(profileImage).into(_ivImage)
-//        _tvName.text = "$userName!"
-//        _tvName.text = profileName
-//
-//        //        Ke Fragment EditProfile
-//        val _btnEdit = view.findViewById<Button>(R.id.btnEdit)
-//        _btnEdit.setOnClickListener{
-//            val mEdit = EditProfile()
-//            mFragmentManager.beginTransaction().apply {
-//                replace(R.id.frameContainer, mEdit, EditProfile::class.java.simpleName)
-//                addToBackStack(null)
-//                commit()
-//            }
-//        }
-//    }
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val mFragmentManager : FragmentManager = parentFragmentManager
@@ -99,7 +74,49 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             commit()
         }
     }
+
+    _rvMyPost = view.findViewById(R.id.rvMyPost)
+    _rvMyPost.layoutManager = LinearLayoutManager(requireContext())
+
+    readData()
 }
+    private fun readData() {
+        db.collection("article")
+            .get()
+            .addOnSuccessListener {
+                    result ->
+                dataArticle.clear()
+                for (document in result) {
+                    val articleData = ArticleData(
+                        document.getString("author") ?: "",
+                        document.getString("description") ?: "",
+                        document.getString("image") ?: "",
+                        document.getString("title") ?: "",
+                        (document.getLong("view") ?: 0).toInt()
+                    )
+                    dataArticle.add(articleData)
+                }
+
+                Log.d("Article Fragment", "Data Retrieved: ${dataArticle.size}") // Log the size of the data
+
+                val layoutManager = LinearLayoutManager(requireContext()) // 1 columns
+                _rvMyPost.layoutManager = layoutManager
+
+                val adapter = AdapterArticle(dataArticle) { data ->
+                    val intent = Intent(activity, DetMyPost::class.java)
+                    intent.putExtra("kirimData", data)
+                    startActivity(intent)
+                }
+
+                _rvMyPost.adapter = adapter
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+                Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
 
 
     override fun onCreateView(
@@ -111,15 +128,6 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Profile.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Profile().apply {
