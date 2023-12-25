@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class AdapterArticle(
     private val listArticle: ArrayList<ArticleData>,
@@ -39,20 +40,20 @@ class AdapterArticle(
         val article = listArticle[position]
 
         holder._tvAuthor.setText(article.author)
-//        holder._tvAuthor.text = article.author
         holder._tvTitle.text = article.title
         holder._tvView.text = article.view.toString()
-        // Set image using appropriate method based on your image source
-        // holder._ivArticle.setImageResource(article.image)
-        val resourceId = holder.itemView.context.resources.getIdentifier(
-            article.image, "drawable", holder.itemView.context.packageName
-        )
-
-        if (resourceId != 0) {
-            holder._ivArticle.setImageResource(resourceId)
-        } else {
-            holder._ivArticle.setImageResource(R.drawable.bajup)
-        }
+        Picasso.get().load(article.image).into(holder._ivArticle)
+//        val resourceId = holder.itemView.context.resources.getIdentifier(
+//            article.image, "drawable", holder.itemView.context.packageName
+//
+//
+//        )
+//
+//        if (resourceId != 0) {
+//            holder._ivArticle.setImageResource(resourceId)
+//        } else {
+//            holder._ivArticle.setImageResource(R.drawable.bajup)
+//        }
         holder.itemView.setOnClickListener {
             onItemClickCallback.invoke(listArticle[position])
         }

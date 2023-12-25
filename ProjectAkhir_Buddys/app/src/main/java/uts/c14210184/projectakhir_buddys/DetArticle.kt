@@ -18,11 +18,8 @@ class DetArticle : AppCompatActivity() {
         val dataIntent = intent.getParcelableExtra<ArticleData>("kirimData")
 
         val context = this
-        val imageRes = context.resources.getIdentifier(
-            "det"+dataIntent?.image,
-            "drawable",
-            context.packageName)
-        Picasso.get().load(imageRes).into(_ivArticle)
+
+        Picasso.get().load(dataIntent?.image).into(_ivArticle)
         _tvTitle.setText(dataIntent!!.title)
         _tvDesc.setText(dataIntent!!.description)
     }
