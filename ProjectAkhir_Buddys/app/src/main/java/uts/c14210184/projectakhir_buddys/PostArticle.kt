@@ -34,26 +34,29 @@ class PostArticle : Fragment() {
     val db = Firebase.firestore
     lateinit var _etTitle : EditText
     lateinit var _etDesc : EditText
-    lateinit var _etAuthor : EditText
+//    lateinit var _etAuthor : EditText
     lateinit var _etImage : EditText
 
 //    var dataArticle = ArrayList<ArticleData>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mFragmentManager : FragmentManager = parentFragmentManager
+        val mainActivity = activity as? MainActivity
+        val userName = mainActivity?.userName
 
         //        Kembali ke Fragment Article dan upload post ke firebase
         val _btnArticle = view.findViewById<Button>(R.id.btnPost)
         _etTitle = view.findViewById<EditText>(R.id.etTitle)
         _etDesc = view.findViewById<EditText>(R.id.etDesc)
-        _etAuthor = view.findViewById<EditText>(R.id.etAuthor)
+//        _etAuthor = view.findViewById<EditText>(R.id.etAuthor)
         _etImage = view.findViewById<EditText>(R.id.etImage)
 
         _btnArticle.setOnClickListener{
             TambahData(
                 _etTitle.text.toString(),
                 _etDesc.text.toString(),
-                _etAuthor.text.toString(),
+                userName.toString(),
                 _etImage.text.toString()
             )
             val mArticle = Article()

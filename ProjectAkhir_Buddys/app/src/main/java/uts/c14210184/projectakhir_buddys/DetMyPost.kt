@@ -34,7 +34,7 @@ class DetMyPost : AppCompatActivity() {
         _btnDel.setOnClickListener {
             dataIntent?.title?.let { articleTitle ->
                 deleteArticle(articleTitle)
-                refreshData() // Call refresh after deleting
+//                refreshData() // Call refresh after deleting
             }
             finish()
         }
@@ -54,33 +54,33 @@ class DetMyPost : AppCompatActivity() {
             }
     }
 
-    private fun refreshData() {
-        db.collection("article")
-            .get()
-            .addOnSuccessListener { result ->
-                val dataArticle = ArrayList<ArticleData>()
-                for (document in result) {
-                    val articleData = ArticleData(
-                        document.getString("author") ?: "",
-                        document.getString("description") ?: "",
-                        document.getString("image") ?: "",
-                        document.getString("title") ?: "",
-                        (document.getLong("view") ?: 0).toInt()
-                    )
-                    dataArticle.add(articleData)
-                }
-                // Refresh the adapter with the updated data
-                adapter = AdapterArticle(dataArticle) { data ->
-                    val intent = Intent(this@DetMyPost, DetArticle::class.java)
-                    intent.putExtra("kirimData", data)
-                    startActivity(intent)
-                }
-                // Update RecyclerView with the refreshed adapter
-                val _rvMyPost: RecyclerView = findViewById(R.id.rvMyPost)
-                _rvMyPost.adapter = adapter
-            }
-            .addOnFailureListener { exception ->
-                exception.printStackTrace()
-            }
-    }
+//    private fun refreshData() {
+//        db.collection("article")
+//            .get()
+//            .addOnSuccessListener { result ->
+//                val dataArticle = ArrayList<ArticleData>()
+//                for (document in result) {
+//                    val articleData = ArticleData(
+//                        document.getString("author") ?: "",
+//                        document.getString("description") ?: "",
+//                        document.getString("image") ?: "",
+//                        document.getString("title") ?: "",
+//                        (document.getLong("view") ?: 0).toInt()
+//                    )
+//                    dataArticle.add(articleData)
+//                }
+//                // Refresh the adapter with the updated data
+//                adapter = AdapterArticle(dataArticle) { data ->
+//                    val intent = Intent(this@DetMyPost, DetArticle::class.java)
+//                    intent.putExtra("kirimData", data)
+//                    startActivity(intent)
+//                }
+//                // Update RecyclerView with the refreshed adapter
+//                val _rvMyPost: RecyclerView = findViewById(R.id.rvMyPost)
+//                _rvMyPost.adapter = adapter
+//            }
+//            .addOnFailureListener { exception ->
+//                exception.printStackTrace()
+//            }
+//    }
 }

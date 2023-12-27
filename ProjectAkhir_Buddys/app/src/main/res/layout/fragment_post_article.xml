@@ -7,23 +7,6 @@
     android:padding="30dp"
     tools:context=".PostArticle">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardImgArticle"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imgArticle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@android:string/autofill"
-            tools:src="@drawable/article3" />
-    </androidx.cardview.widget.CardView>
-
 
     <EditText
         android:id="@+id/etImage"
@@ -34,7 +17,7 @@
         android:inputType="textUri"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardImgArticle" />
+        app:layout_constraintTop_toBottomOf="@+id/articleImg" />
 
     <EditText
         android:id="@+id/etTitle"
@@ -58,27 +41,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTitle" />
 
-    <EditText
-        android:id="@+id/etAuthor"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:hint="Author Name"
-        android:inputType="textLongMessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDesc" />
-
-
     <Button
         android:id="@+id/btnPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/black"
         android:text="Post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAuthor" />
+        app:layout_constraintTop_toBottomOf="@+id/etDesc" />
+
+    <ImageView
+        android:id="@+id/articleImg"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/articleimg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

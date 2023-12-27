@@ -28,6 +28,7 @@ class Profile : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private var dataArticle = ArrayList<ArticleData>()
     private lateinit var _rvMyPost: RecyclerView
+    private var name: String? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +44,7 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     val mainActivity = activity as? MainActivity
 
     val userName = mainActivity?.userName
+    name = userName
     val defaultImageUrl = mainActivity?.defaultImageUrl
 
     val _tvName = view.findViewById<TextView>(R.id.tvName)
@@ -75,9 +77,9 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 }
     private fun readData() {
         db.collection("article")
+            .whereEqualTo("author", name)
             .get()
-            .addOnSuccessListener {
-                    result ->
+            .addOnSuccessListener { result ->
                 dataArticle.clear()
                 for (document in result) {
                     val articleData = ArticleData(
@@ -90,9 +92,9 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
                     dataArticle.add(articleData)
                 }
 
-                Log.d("Article Fragment", "Data Retrieved: ${dataArticle.size}") // Log the size of the data
+                Log.d("Article Fragment", "Data Retrieved: ${dataArticle.size}")
 
-                val layoutManager = LinearLayoutManager(requireContext()) // 1 columns
+                val layoutManager = LinearLayoutManager(requireContext())
                 _rvMyPost.layoutManager = layoutManager
 
                 val adapter = AdapterArticle(dataArticle) { data ->
