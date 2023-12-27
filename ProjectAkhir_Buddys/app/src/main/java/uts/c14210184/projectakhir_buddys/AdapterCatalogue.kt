@@ -33,11 +33,11 @@ class AdapterCatalogue(
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val catalogue = listCatalogue[position]
 
-        holder._tvName.text = catalogue.item
+        holder._tvName.text = catalogue.name
         holder._tvCategories.text = catalogue.categories
 
         val resourceId = holder.itemView.context.resources.getIdentifier(
-            catalogue.gambar, "drawable", holder.itemView.context.packageName
+            catalogue.image, "drawable", holder.itemView.context.packageName
         )
         if (resourceId != 0) {
             holder._ivCatalogue.setImageResource(resourceId)

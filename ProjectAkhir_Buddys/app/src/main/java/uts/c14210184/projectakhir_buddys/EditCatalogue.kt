@@ -30,33 +30,34 @@ class EditCatalogue : AppCompatActivity() {
         val dataIntent = intent.getParcelableExtra<CatalogueData>("kirimData")
 
         _ivBack.setOnClickListener {
-        this.onBackPressed()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         _btSave.setOnClickListener {
             val Title = _tvTitles.text.toString()
             val newCategories = _etCategories.text.toString()
             val newDescription = _etDescription.text.toString()
-            val Image = dataIntent?.gambar.toString()
+            val Image = dataIntent?.image.toString()
             TambahData(Title, newDescription, newCategories, Image)
         }
 
 
         val context = this
         val imageRes = context.resources.getIdentifier(
-            dataIntent?.gambar,
+            dataIntent?.image,
             "drawable",
             context.packageName)
         Picasso.get().load(imageRes).into(_ivDetCatalogue)
-        _tvTitles.setText(dataIntent!!.item)
+        _tvTitles.setText(dataIntent!!.name)
         _etCategories.setText(dataIntent!!.categories)
         _etDescription.setText(dataIntent!!.desc)
     }
-    fun TambahData(Title: String, Description: String, Categories: String, Image: String) {
-        val dataBaru = CatalogueData(Image, Title, Categories, Description)
+    fun TambahData(Name: String, Description: String, Categories: String, Image: String) {
+        val dataBaru = CatalogueData(Image, Name, Categories, Description)
 
         db.collection("catalogue")
-            .document(Title)
+            .document(Name)
             .set(dataBaru)
             .addOnSuccessListener {
                 Toast.makeText(
@@ -64,8 +65,6 @@ class EditCatalogue : AppCompatActivity() {
                     "Data Berhasil disimpan",
                     Toast.LENGTH_SHORT
                 ).show()
-
-                // Navigate to DetCatalogue upon successful addition
                 val intent = Intent(this@EditCatalogue, DetCatalogue::class.java)
                 intent.putExtra("kirimData", dataBaru)
                 startActivity(intent)

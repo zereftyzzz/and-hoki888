@@ -5,8 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CatalogueData(
-    var gambar: String,
-    var item: String,
+    var image: String,
+    var name: String,
     var categories: String,
     var desc: String
 ) : Parcelable
