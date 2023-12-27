@@ -14,7 +14,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        userName = intent.getStringExtra("userName")
+        if (intent.getStringExtra("userName").isNullOrEmpty()){
+            userName = "Guest"
+        }
+        else {
+            userName = intent.getStringExtra("userName")
+        }
         val fragmentManager = supportFragmentManager
 
         val catalogueFragment = Catalogue()

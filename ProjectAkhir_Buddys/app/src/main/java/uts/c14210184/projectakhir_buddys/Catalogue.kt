@@ -58,7 +58,8 @@ class Catalogue : Fragment() {
                     val catalogueData = CatalogueData(
                         document.getString("image") ?: "",
                         document.getString("name") ?: "",
-                        document.getString("categories") ?: ""
+                        document.getString("categories") ?: "",
+                        document.getString("desc") ?: ""
                     )
                     dataCatalogue.add(catalogueData)
                 }

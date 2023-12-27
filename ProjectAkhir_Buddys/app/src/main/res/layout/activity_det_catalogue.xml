@@ -23,6 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Detail Catalogue"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ivDetCatalogue" />
 
     <TextView
-        android:id="@+id/tvCategories"
+        android:id="@+id/etCategories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -51,12 +53,32 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitles" />
 
     <TextView
-        android:id="@+id/tvDescription"
+        android:id="@+id/etDescription"
         android:layout_width="304dp"
         android:layout_height="214dp"
         android:layout_marginTop="16dp"
         android:text="N-n-now that that don't kill me Can only make me stronger I need you to hurry up now 'Cause I can't wait much longer I know I got to be right now 'Cause I can't get much wronger Man, I've been waiting all night now That's how long I been on ya (Work it harder, make it better) (Do it faster, makes us stronger) I need you right now (More than ever, hour after hour, work) I need you right now"
         app:layout_constraintEnd_toEndOf="@+id/tvTitles"
         app:layout_constraintStart_toStartOf="@+id/tvTitles"
-        app:layout_constraintTop_toBottomOf="@+id/tvCategories" />
+        app:layout_constraintTop_toBottomOf="@+id/etCategories" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/ivEdit"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/edit" />
 </androidx.constraintlayout.widget.ConstraintLayout>
