@@ -56,8 +56,16 @@ class Catalogue : Fragment() {
             _ivTambah.visibility = View.INVISIBLE
         }
 
+        _ivTambah.setOnClickListener {
+            val intent = Intent(activity, PostCatalogue::class.java)
+            intent.putExtra("userName", username)
+            startActivity(intent)
+        }
+
         readData(admin,username)
     }
+
+
 
     private fun readData(admin:Boolean?, username:String?) {
         db.collection("catalogue")

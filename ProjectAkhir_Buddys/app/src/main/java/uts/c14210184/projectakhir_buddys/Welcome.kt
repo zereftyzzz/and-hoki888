@@ -22,4 +22,6 @@ class Welcome : AppCompatActivity() {
             finish() // Optional: finish the Welcome activity to prevent going back to it on back press
         }
     }
+
+
 }

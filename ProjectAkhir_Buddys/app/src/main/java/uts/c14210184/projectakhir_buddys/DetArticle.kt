@@ -28,7 +28,7 @@ class DetArticle : AppCompatActivity() {
         _tvDesc.setText(dataIntent!!.description)
 
         _ivBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, Article::class.java)
             intent.putExtra("userName", name)
             startActivity(intent)
         }
