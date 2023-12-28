@@ -36,7 +36,6 @@ class EditProfile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mFragmentManager : FragmentManager = parentFragmentManager
         val mainActivity = activity as? MainActivity
-
         val _etProfileImage = view.findViewById<EditText>(R.id.etProfileImage)
         val _etProfileName = view.findViewById<EditText>(R.id.etProfileName)
 
@@ -50,10 +49,15 @@ class EditProfile : Fragment() {
 
             val profileImageText = _etProfileImage.text.toString().trim()
             val profileNameText = _etProfileName.text.toString().trim()
+            var admin = false
+            if (profileNameText.toString().toUpperCase() == "ADMIN"){
+                admin = true
+            }
+
 
             if (profileImageText.isNotEmpty() && profileNameText.isNotEmpty()) {
                 mProfile.arguments = bundle
-                mainActivity?.setUserData(profileNameText, profileImageText)
+                mainActivity?.setUserData(profileNameText,profileImageText,admin)
                 mFragmentManager.beginTransaction().apply {
                     replace(R.id.frameContainer, mProfile, Profile::class.java.simpleName)
                     addToBackStack(null)

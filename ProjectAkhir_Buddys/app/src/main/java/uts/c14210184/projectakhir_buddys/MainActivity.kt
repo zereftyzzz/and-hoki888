@@ -70,8 +70,9 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
-    fun setUserData(userName: String?, imageUrl: String?) {
+    fun setUserData(userName: String?, imageUrl: String?, admin: Boolean) {
         this.userName = userName
         this.defaultImageUrl = imageUrl
+        this.admin = admin
     }
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,9 +46,16 @@ class Catalogue : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _rvCatalogue = view.findViewById(R.id.rvCatalogue)
         _rvCatalogue.layoutManager = LinearLayoutManager(requireContext())
+        val _ivTambah = view.findViewById<ImageView>(R.id.ivTambah)
+
         val mainActivity = activity as? MainActivity
         val admin = mainActivity?.admin
         val username = mainActivity?.userName
+
+        if(admin == false){
+            _ivTambah.visibility = View.INVISIBLE
+        }
+
         readData(admin,username)
     }
 
@@ -71,7 +79,8 @@ class Catalogue : Fragment() {
                 val layoutManager = GridLayoutManager(requireContext(), 2)
                 _rvCatalogue.layoutManager = layoutManager
 
-                val adapter: AdapterCatalogue = if (admin == true) {
+                val adapter: AdapterCatalogue =
+                    if (admin == true) {
                     AdapterCatalogue(dataCatalogue) { data ->
                         val intent = Intent(activity, DetCatalogue::class.java)
                         intent.putExtra("userName", username)
