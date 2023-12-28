@@ -22,7 +22,6 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class Profile : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private val db = FirebaseFirestore.getInstance()
@@ -110,9 +109,6 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
                 Toast.makeText(requireContext(), "Failed to fetch data", Toast.LENGTH_SHORT).show()
             }
     }
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

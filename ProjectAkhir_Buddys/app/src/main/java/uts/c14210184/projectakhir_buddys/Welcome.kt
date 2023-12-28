@@ -19,7 +19,7 @@ class Welcome : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("userName", name)
             startActivity(intent)
-            finish() // Optional: finish the Welcome activity to prevent going back to it on back press
+            finish()
         }
     }
 

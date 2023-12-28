@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/ivBg"
-        android:layout_width="201dp"
-        android:layout_height="261dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="190dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/bgcard"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,12 +27,14 @@
 
     <TextView
         android:id="@+id/item_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
         android:text="Adidas 2023 Tee"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/ivBg"
         app:layout_constraintStart_toStartOf="@+id/ivCatalogue"
         app:layout_constraintTop_toBottomOf="@+id/ivCatalogue" />
 

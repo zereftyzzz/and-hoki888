@@ -18,12 +18,7 @@ class AdapterArticle(
         var _tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         var _tvView: TextView = itemView.findViewById(R.id.tvView)
         var _ivArticle: ImageView = itemView.findViewById(R.id.ivArticle)
-//
-//        init {
-//            itemView.setOnClickListener {
-//                onItemClickCallback.onItemClicked(listArticle[adapterPosition])
-//            }
-//        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -43,28 +38,10 @@ class AdapterArticle(
         holder._tvTitle.text = article.title
         holder._tvView.text = article.view.toString()
         Picasso.get().load(article.image).into(holder._ivArticle)
-//        val resourceId = holder.itemView.context.resources.getIdentifier(
-//            article.image, "drawable", holder.itemView.context.packageName
-//
-//
-//        )
-//
-//        if (resourceId != 0) {
-//            holder._ivArticle.setImageResource(resourceId)
-//        } else {
-//            holder._ivArticle.setImageResource(R.drawable.bajup)
-//        }
+
         holder.itemView.setOnClickListener {
             onItemClickCallback.invoke(listArticle[position])
         }
     }
 
-//    interface OnItemClickCallback {
-//        fun onItemClicked(data: ArticleData)
-////        fun delData(pos: Int)
-//    }
-//
-//    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-//        this.onItemClickCallback = onItemClickCallback
-//    }
 }

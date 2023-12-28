@@ -51,19 +51,6 @@ class DetCatalogue : AppCompatActivity() {
             finish()
         }
 
-//        val resourceId = resources.getIdentifier(
-//            dataIntent?.gambar, "drawable", packageName
-//        )
-//        _ivDetCatalogue.setImageResource(resourceId)
-//        val context = this
-//        val imageRes = context.resources.getIdentifier(
-//            dataIntent?.image,
-//            "drawable",
-//            context.packageName)
-//        Picasso.get().load(imageRes).into(_ivDetCatalogue)
-//        _tvTitles.setText(dataIntent!!.name)
-//        _tvCategories.setText(dataIntent!!.categories)
-//        _tvDescription.setText(dataIntent!!.desc)
         val documentId = dataIntent?.name ?: ""
         db.collection("catalogue")
             .document(documentId)

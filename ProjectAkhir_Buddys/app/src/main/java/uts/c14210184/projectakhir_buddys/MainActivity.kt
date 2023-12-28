@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity() {
     public var userName: String? = null
     public var defaultImageUrl: String? = "https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
     public var admin: Boolean = false
-//    public var article: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,8 +92,6 @@ class MainActivity : AppCompatActivity() {
         this.defaultImageUrl = imageUrl
         this.admin = admin
     }
-//    fun setArticle(article: Boolean){
-//        this.article = article
-//    }
+
 }
 
