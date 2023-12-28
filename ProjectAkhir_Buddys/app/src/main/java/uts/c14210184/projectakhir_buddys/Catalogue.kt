@@ -45,11 +45,12 @@ class Catalogue : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _rvCatalogue = view.findViewById(R.id.rvCatalogue)
         _rvCatalogue.layoutManager = LinearLayoutManager(requireContext())
-
-        readData()
+        val mainActivity = activity as? MainActivity
+        val admin = mainActivity?.admin
+        readData(admin)
     }
 
-    private fun readData() {
+    private fun readData(admin:Boolean?) {
         db.collection("catalogue")
             .get()
             .addOnSuccessListener { result ->
@@ -69,10 +70,18 @@ class Catalogue : Fragment() {
                 val layoutManager = GridLayoutManager(requireContext(), 2)
                 _rvCatalogue.layoutManager = layoutManager
 
-                val adapter = AdapterCatalogue(dataCatalogue) { data ->
-                    val intent = Intent(activity, DetCatalogue::class.java)
-                    intent.putExtra("kirimData", data)
-                    startActivity(intent)
+                val adapter: AdapterCatalogue = if (admin == true) {
+                    AdapterCatalogue(dataCatalogue) { data ->
+                        val intent = Intent(activity, DetCatalogue::class.java)
+                        intent.putExtra("kirimData", data)
+                        startActivity(intent)
+                    }
+                } else {
+                    AdapterCatalogue(dataCatalogue) { data ->
+                        val intent = Intent(activity, DetCatalogue2::class.java)
+                        intent.putExtra("kirimData", data)
+                        startActivity(intent)
+                    }
                 }
 
                 _rvCatalogue.adapter = adapter

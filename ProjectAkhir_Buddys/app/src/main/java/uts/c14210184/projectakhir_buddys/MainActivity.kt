@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity() {
     public var userName: String? = null
     public var defaultImageUrl: String? = "https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
+    public var admin: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,9 +21,17 @@ class MainActivity : AppCompatActivity() {
         else {
             userName = intent.getStringExtra("userName")
         }
+
+        if (userName.toString().toUpperCase() == "ADMIN"){
+            admin = true
+        }
+
         val fragmentManager = supportFragmentManager
 
         val catalogueFragment = Catalogue()
+        val bundle2 = Bundle()
+        bundle2.putBoolean("admin",admin)
+        catalogueFragment.arguments = bundle2
         fragmentManager.beginTransaction()
             .replace(R.id.frameContainer, catalogueFragment, Catalogue::class.java.simpleName)
             .commit()
