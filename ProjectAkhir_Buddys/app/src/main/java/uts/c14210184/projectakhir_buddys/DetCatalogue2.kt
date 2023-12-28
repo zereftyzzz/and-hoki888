@@ -16,7 +16,7 @@ class DetCatalogue2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_det_catalogue2)
-
+        val name = intent.getStringExtra("userName")
 
 
         val _ivDetCatalogue = findViewById<ImageView>(R.id.ivDetCatalogue)
@@ -29,7 +29,9 @@ class DetCatalogue2 : AppCompatActivity() {
         val dataIntent = intent.getParcelableExtra<CatalogueData>("kirimData")
 
         _ivBack.setOnClickListener {
+            val pass_name = name.toString()
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userName", pass_name)
             startActivity(intent)
         }
 

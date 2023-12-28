@@ -19,6 +19,7 @@ class EditCatalogue : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_catalogue)
+        val name = intent.getStringExtra("userName")
 
         val _ivDetCatalogue = findViewById<ImageView>(R.id.ivDetCatalogue)
         val _etDescription = findViewById<EditText>(R.id.etDescription)
@@ -30,7 +31,9 @@ class EditCatalogue : AppCompatActivity() {
         val dataIntent = intent.getParcelableExtra<CatalogueData>("kirimData")
 
         _ivBack.setOnClickListener {
+            val pass_name = name.toString()
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userName", pass_name)
             startActivity(intent)
         }
 

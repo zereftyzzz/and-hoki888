@@ -16,6 +16,7 @@ class DetCatalogue : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_det_catalogue)
+        val name = intent.getStringExtra("userName")
 
         val _ivDetCatalogue = findViewById<ImageView>(R.id.ivDetCatalogue)
         val _tvDescription = findViewById<TextView>(R.id.etDescription)
@@ -29,12 +30,7 @@ class DetCatalogue : AppCompatActivity() {
 
         _ivBack.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-        _ivEdit.setOnClickListener {
-            val intent = Intent(this@DetCatalogue, EditCatalogue::class.java)
-            intent.putExtra("kirimData", dataIntent)
+            intent.putExtra("userName", name)
             startActivity(intent)
         }
 

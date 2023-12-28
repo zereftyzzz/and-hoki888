@@ -17,7 +17,7 @@ class Welcome : AppCompatActivity() {
         btnStart.setOnClickListener {
             val name = _etName.text.toString()
             val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("userName", name)
+            intent.putExtra("userName", name)
             startActivity(intent)
             finish() // Optional: finish the Welcome activity to prevent going back to it on back press
         }
