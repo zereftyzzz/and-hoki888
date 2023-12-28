@@ -34,6 +34,13 @@ class DetCatalogue : AppCompatActivity() {
             startActivity(intent)
         }
 
+        _ivEdit.setOnClickListener {
+            val intent = Intent(this, EditCatalogue::class.java)
+            intent.putExtra("kirimData", dataIntent)
+            intent.putExtra("userName", name)
+            startActivity(intent)
+        }
+
 //        val resourceId = resources.getIdentifier(
 //            dataIntent?.gambar, "drawable", packageName
 //        )

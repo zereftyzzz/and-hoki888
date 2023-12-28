@@ -38,11 +38,12 @@ class EditCatalogue : AppCompatActivity() {
         }
 
         _btSave.setOnClickListener {
+            val pass_name = name.toString()
             val Title = _tvTitles.text.toString()
             val newCategories = _etCategories.text.toString()
             val newDescription = _etDescription.text.toString()
             val Image = dataIntent?.image.toString()
-            TambahData(Title, newDescription, newCategories, Image)
+            TambahData(Title, newDescription, newCategories, Image,pass_name)
         }
 
 
@@ -56,7 +57,7 @@ class EditCatalogue : AppCompatActivity() {
         _etCategories.setText(dataIntent!!.categories)
         _etDescription.setText(dataIntent!!.desc)
     }
-    fun TambahData(Name: String, Description: String, Categories: String, Image: String) {
+    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String) {
         val dataBaru = CatalogueData(Image, Name, Categories, Description)
 
         db.collection("catalogue")
@@ -69,6 +70,7 @@ class EditCatalogue : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
                 val intent = Intent(this@EditCatalogue, DetCatalogue::class.java)
+                intent.putExtra("userName", username)
                 intent.putExtra("kirimData", dataBaru)
                 startActivity(intent)
             }
