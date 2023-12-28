@@ -34,7 +34,7 @@ class PostArticle : Fragment() {
     val db = Firebase.firestore
     lateinit var _etTitle : EditText
     lateinit var _etDesc : EditText
-//    lateinit var _etAuthor : EditText
+    //    lateinit var _etAuthor : EditText
     lateinit var _etImage : EditText
 
 //    var dataArticle = ArrayList<ArticleData>()

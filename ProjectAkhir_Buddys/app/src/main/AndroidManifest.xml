@@ -16,6 +16,9 @@
             android:name=".DetCatalogue2"
             android:exported="false" />
         <activity
+            android:name=".AdminPage"
+            android:exported="false" />
+        <activity
             android:name=".EditCatalogue"
             android:exported="false" />
         <activity

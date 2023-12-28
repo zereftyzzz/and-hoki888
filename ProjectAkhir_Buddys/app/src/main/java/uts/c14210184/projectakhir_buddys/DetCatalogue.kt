@@ -24,7 +24,7 @@ class DetCatalogue : AppCompatActivity() {
         val _tvTitles = findViewById<TextView>(R.id.tvTitles)
         val _ivBack = findViewById<ImageView>(R.id.ivBack)
         val _ivEdit = findViewById<ImageView>(R.id.ivEdit)
-
+        val _ivDelete = findViewById<ImageView>(R.id.ivDelete)
 
         val dataIntent = intent.getParcelableExtra<CatalogueData>("kirimData")
 
@@ -39,6 +39,14 @@ class DetCatalogue : AppCompatActivity() {
             intent.putExtra("kirimData", dataIntent)
             intent.putExtra("userName", name)
             startActivity(intent)
+        }
+
+        _ivDelete.setOnClickListener {
+            dataIntent?.name?.let { itemName ->
+                deleteItem(itemName)
+//                refreshData() // Call refresh after deleting
+            }
+            finish()
         }
 
 //        val resourceId = resources.getIdentifier(
@@ -86,4 +94,19 @@ class DetCatalogue : AppCompatActivity() {
             }
 
     }
+
+    private fun deleteItem(itemName: String) {
+        db.collection("catalogue")
+            .whereEqualTo("name", itemName)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    document.reference.delete()
+                }
+            }
+            .addOnFailureListener { exception ->
+                exception.printStackTrace()
+            }
+    }
+
 }
