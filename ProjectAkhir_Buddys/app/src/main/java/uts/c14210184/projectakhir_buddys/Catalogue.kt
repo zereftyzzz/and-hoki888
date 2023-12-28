@@ -58,6 +58,8 @@ class Catalogue : Fragment() {
 
         _ivTambah.setOnClickListener {
             val intent = Intent(activity, PostCatalogue::class.java)
+            val article = false
+            intent.putExtra("article_back",article)
             intent.putExtra("userName", username)
             startActivity(intent)
         }

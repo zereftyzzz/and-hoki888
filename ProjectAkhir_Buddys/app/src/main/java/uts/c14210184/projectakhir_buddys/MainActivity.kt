@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     public var userName: String? = null
     public var defaultImageUrl: String? = "https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
     public var admin: Boolean = false
+//    public var article: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,16 +27,10 @@ class MainActivity : AppCompatActivity() {
             admin = true
         }
 
+
         val fragmentManager = supportFragmentManager
 
         val catalogueFragment = Catalogue()
-        val bundle2 = Bundle()
-        bundle2.putBoolean("admin",admin)
-        catalogueFragment.arguments = bundle2
-        fragmentManager.beginTransaction()
-            .replace(R.id.frameContainer, catalogueFragment, Catalogue::class.java.simpleName)
-            .commit()
-
         findViewById<ImageView>(R.id.Btn_Home).setOnClickListener {
             fragmentManager.beginTransaction()
                 .replace(R.id.frameContainer, catalogueFragment, Catalogue::class.java.simpleName)
@@ -69,10 +64,37 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .commit()
         }
+
+        //back article
+        handleArticleLogic()
+    }
+    private fun handleArticleLogic() {
+        val article = intent.getBooleanExtra("article_back", false)
+        if (article) {
+            val bundle2 = Bundle()
+            bundle2.putBoolean("admin", admin)
+            val articleFragment = Article()
+            articleFragment.arguments = bundle2
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameContainer, articleFragment, Article::class.java.simpleName)
+                .commit()
+        } else {
+            val bundle2 = Bundle()
+            bundle2.putBoolean("admin", admin)
+            val catalogueFragment = Catalogue()
+            catalogueFragment.arguments = bundle2
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameContainer, catalogueFragment, Catalogue::class.java.simpleName)
+                .commit()
+        }
     }
     fun setUserData(userName: String?, imageUrl: String?, admin: Boolean) {
         this.userName = userName
         this.defaultImageUrl = imageUrl
         this.admin = admin
     }
+//    fun setArticle(article: Boolean){
+//        this.article = article
+//    }
 }
+

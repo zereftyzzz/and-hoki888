@@ -31,6 +31,8 @@ class DetCatalogue2 : AppCompatActivity() {
         _ivBack.setOnClickListener {
             val pass_name = name.toString()
             val intent = Intent(this, MainActivity::class.java)
+            val article = false
+            intent.putExtra("article_back",article)
             intent.putExtra("userName", pass_name)
             startActivity(intent)
         }

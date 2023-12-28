@@ -33,6 +33,8 @@ class EditCatalogue : AppCompatActivity() {
         _ivBack.setOnClickListener {
             val pass_name = name.toString()
             val intent = Intent(this, MainActivity::class.java)
+            val article = false
+            intent.putExtra("article_back",article)
             intent.putExtra("userName", pass_name)
             startActivity(intent)
         }
@@ -70,6 +72,8 @@ class EditCatalogue : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
                 val intent = Intent(this@EditCatalogue, DetCatalogue::class.java)
+                val article = false
+                intent.putExtra("article_back",article)
                 intent.putExtra("userName", username)
                 intent.putExtra("kirimData", dataBaru)
                 startActivity(intent)
