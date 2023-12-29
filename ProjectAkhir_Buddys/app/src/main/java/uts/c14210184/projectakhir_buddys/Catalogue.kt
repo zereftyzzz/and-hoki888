@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.firestore
 
 private const val ARG_PARAM1 = "param1"
@@ -99,7 +98,7 @@ class Catalogue : Fragment() {
                         document.getString("name") ?: "",
                         document.getString("categories") ?: "",
                         document.getString("desc") ?: "",
-                        document.getBoolean("love") ?: false
+                        document.get("love") as? ArrayList<String> ?: ArrayList()
                     )
                     dataCatalogue.add(catalogueData)
                 }
@@ -130,6 +129,7 @@ class Catalogue : Fragment() {
                     }
                 }
 
+                adapter.username = username
                 _rvCatalogue.adapter = adapter
             }
             .addOnFailureListener { exception ->

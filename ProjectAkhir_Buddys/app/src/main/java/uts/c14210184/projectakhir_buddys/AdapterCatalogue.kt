@@ -13,8 +13,9 @@ class AdapterCatalogue(
     private val listCatalogue: ArrayList<CatalogueData>,
     private val onItemClickCallback: (CatalogueData) -> Unit
 ) : RecyclerView.Adapter<AdapterCatalogue.ListViewHolder>() {
-
+    var username: String? = null
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         var _tvName: TextView = itemView.findViewById(R.id.item_name)
         var _tvCategories: TextView = itemView.findViewById(R.id.item_categories)
         var _ivCatalogue: ImageView = itemView.findViewById(R.id.ivCatalogue)
@@ -33,13 +34,24 @@ class AdapterCatalogue(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val catalogue = listCatalogue[position]
-        //cek love
-        if(catalogue.love == true){
-            holder._ivLoveBTN.setImageResource(R.drawable.filledheart)
-        }
-        else{
+
+        //cek username
+        val usernameExists = catalogue.love?.contains(username)
+        if (usernameExists == false) {
             holder._ivLoveBTN.setImageResource(R.drawable.unfilledheart)
+        } else {
+            holder._ivLoveBTN.setImageResource(R.drawable.filledheart)
+
         }
+
+
+//        //cek love
+//        if(lovetrue){
+//            holder._ivLoveBTN.setImageResource(R.drawable.filledheart)
+//        }
+//        else{
+//            holder._ivLoveBTN.setImageResource(R.drawable.unfilledheart)
+//        }
 
         holder._tvName.text = catalogue.name
         holder._tvCategories.text = catalogue.categories

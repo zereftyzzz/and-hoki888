@@ -9,5 +9,5 @@ data class CatalogueData(
     var name: String,
     var categories: String,
     var desc: String,
-    var love: Boolean?
+    var love: ArrayList<String>
 ) : Parcelable

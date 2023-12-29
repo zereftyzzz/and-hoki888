@@ -9,10 +9,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import com.squareup.picasso.Picasso
+
 class PostCatalogue : AppCompatActivity() {
     val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +44,7 @@ class PostCatalogue : AppCompatActivity() {
             val newCategories = _etCategories.text.toString()
             val newDescription = _etDescription.text.toString()
             val Image = _etImage.text.toString()
-            val love = false
+            val love: ArrayList<String> = ArrayList()
             TambahData(Title, newDescription, newCategories, Image,pass_name,love)
         }
 
@@ -60,8 +59,8 @@ class PostCatalogue : AppCompatActivity() {
 //        _etCategories.setText(dataIntent!!.categories)
 //        _etDescription.setText(dataIntent!!.desc)
     }
-    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String, love:Boolean) {
-        val dataBaru = CatalogueData(Image, Name, Categories, Description,love)
+    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String, Loved: ArrayList<String>?) {
+        val dataBaru = CatalogueData(Image, Name, Categories, Description,Loved ?: ArrayList())
 
         db.collection("catalogue")
             .document(Name)

@@ -51,7 +51,7 @@ class DetCatalogue2 : AppCompatActivity() {
                         documentSnapshot.getString("name") ?: "",
                         documentSnapshot.getString("categories") ?: "",
                         documentSnapshot.getString("desc") ?: "",
-                        documentSnapshot.getBoolean("love") ?: false
+                        documentSnapshot.get("love") as? ArrayList<String> ?: ArrayList()
 
                     )
 
