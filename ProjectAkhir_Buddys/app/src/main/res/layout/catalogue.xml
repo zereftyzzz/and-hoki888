@@ -49,4 +49,14 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="214dp" />
 
+    <ImageView
+        android:id="@+id/ivLove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="124dp"
+        app:layout_constraintBottom_toTopOf="@+id/item_name"
+        app:layout_constraintStart_toEndOf="@+id/ivCatalogue"
+        app:srcCompat="@drawable/unfilledheart" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

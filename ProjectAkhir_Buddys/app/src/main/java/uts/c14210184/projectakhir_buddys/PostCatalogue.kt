@@ -19,6 +19,8 @@ class PostCatalogue : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_catalogue)
         val name = intent.getStringExtra("userName")
+        val gambar = intent.getStringExtra("Gambar")
+
 
         val _etNameCat = findViewById<EditText>(R.id.etNameCat)
         val _etDescription = findViewById<EditText>(R.id.etDescription)
@@ -33,6 +35,7 @@ class PostCatalogue : AppCompatActivity() {
             val pass_name = name.toString()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("userName", pass_name)
+            intent.putExtra("Gambar", gambar)
             startActivity(intent)
         }
 

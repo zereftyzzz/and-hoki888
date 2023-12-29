@@ -47,6 +47,7 @@ class Catalogue : Fragment() {
         _rvCatalogue = view.findViewById(R.id.rvCatalogue)
         _rvCatalogue.layoutManager = LinearLayoutManager(requireContext())
         val _ivTambah = view.findViewById<ImageView>(R.id.ivTambah)
+        val _ivLoved = view.findViewById<ImageView>(R.id.ivLoved)
 
         val mainActivity = activity as? MainActivity
         val admin = mainActivity?.admin
@@ -56,7 +57,9 @@ class Catalogue : Fragment() {
         if(admin == false){
             _ivTambah.visibility = View.INVISIBLE
         }
-
+        _ivLoved.setOnClickListener {
+            //ke page loved
+        }
         _ivTambah.setOnClickListener {
             val intent = Intent(activity, PostCatalogue::class.java)
             val article = false
