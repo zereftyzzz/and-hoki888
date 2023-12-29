@@ -35,14 +35,14 @@ class PostArticle : Fragment() {
         val mainActivity = activity as? MainActivity
         val userName = mainActivity?.userName
 
-        //        Kembali ke Fragment Article dan upload post ke firebase
         val _btnArticle = view.findViewById<Button>(R.id.btnPost)
         _etTitle = view.findViewById<EditText>(R.id.etTitle)
         _etDesc = view.findViewById<EditText>(R.id.etDesc)
-//        _etAuthor = view.findViewById<EditText>(R.id.etAuthor)
         _etImage = view.findViewById<EditText>(R.id.etImage)
 
+        //   Upload post ke firebase dan kembali ke Fragment Article
         _btnArticle.setOnClickListener{
+//            memasukkan data dari editText
             TambahData(
                 _etTitle.text.toString(),
                 _etDesc.text.toString(),
@@ -51,6 +51,7 @@ class PostArticle : Fragment() {
             )
             val mArticle = Article()
             val mFragmentManager : FragmentManager = parentFragmentManager
+//            Kembali ke Fragment Article
             mFragmentManager.beginTransaction().apply {
                 replace(R.id.frameContainer, mArticle, Article::class.java.simpleName)
                 addToBackStack(null)
@@ -59,23 +60,24 @@ class PostArticle : Fragment() {
         }
     }
 
-//    Firebase
-
+//    add article
     fun TambahData(Title : String, Description : String, Author: String, Image: String){
-        var View = Random.nextInt(20,900)
-        val dataBaru = ArticleData(Author, Description, Image, Title, View)
+        var View = Random.nextInt(20,900)  // menentukan jumlah view menggunakan function random
+        val dataBaru = ArticleData(Author, Description, Image, Title, View) // menambah data baru menggunakan data dr editText
         db.collection("article")
             .document(Title)
             .set(dataBaru)
+//            ketika berhasil menambah data
             .addOnSuccessListener {
                 _etTitle.setText("")
                 _etDesc.setText("")
                 Toast.makeText(
-                    requireContext(), // Use requireContext() here
+                    requireContext(),
                     "Data Berhasil disimpan",
                     Toast.LENGTH_SHORT
                 ).show()
             }
+//            error handling
             .addOnFailureListener { e ->
                 Log.w(
                     "PROJ_DMFIREBASE",

@@ -13,13 +13,13 @@
         android:theme="@style/Theme.ProjectAkhir_Buddys"
         tools:targetApi="31">
         <activity
+            android:name=".CatalogueLoved"
+            android:exported="false" />
+        <activity
             android:name=".PostCatalogue"
             android:exported="false" />
         <activity
             android:name=".DetCatalogue2"
-            android:exported="false" />
-        <activity
-            android:name=".AdminPage"
             android:exported="false" />
         <activity
             android:name=".EditCatalogue"

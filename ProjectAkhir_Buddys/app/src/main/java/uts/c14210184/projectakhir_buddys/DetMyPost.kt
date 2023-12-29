@@ -40,17 +40,18 @@ class DetMyPost : AppCompatActivity() {
         }
     }
 
+//    delete artikel
     private fun deleteArticle(articleTitle: String) {
         db.collection("article")
-            .whereEqualTo("title", articleTitle)
+            .whereEqualTo("title", articleTitle) // mencari yang titlenya sama
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    document.reference.delete()
+                    document.reference.delete() //delete artikel tsb
                 }
                 Toast.makeText(this, "Deletion successful", Toast.LENGTH_SHORT).show()
                 val resultIntent = Intent().apply {
-                    putExtra("refreshData", true)
+                    putExtra("refreshData", true) // refresh setelah delete
                 }
                 setResult(RESULT_OK, resultIntent)
                 finish()

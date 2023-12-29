@@ -21,11 +21,13 @@ class DetArticle : AppCompatActivity() {
         val _ivBack = findViewById<ImageView>(R.id.ivBackArt)
 
 
+//        Set tulisan dan gambar
         val dataIntent = intent.getParcelableExtra<ArticleData>("kirimData")
         Picasso.get().load(dataIntent?.image).into(_ivArticle)
         _tvTitle.setText(dataIntent!!.title)
         _tvDesc.setText(dataIntent!!.description)
 
+//        Back ke page article
         _ivBack.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             val article = true

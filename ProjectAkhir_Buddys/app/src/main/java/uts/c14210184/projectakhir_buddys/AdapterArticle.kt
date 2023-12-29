@@ -27,10 +27,12 @@ class AdapterArticle(
         return ListViewHolder(view)
     }
 
+//    Menghitung jumlah article
     override fun getItemCount(): Int {
         return    listArticle.size
     }
 
+//    Set isi text dan gambarnya
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val article = listArticle[position]
 
