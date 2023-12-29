@@ -18,6 +18,7 @@ class AdapterCatalogue(
         var _tvName: TextView = itemView.findViewById(R.id.item_name)
         var _tvCategories: TextView = itemView.findViewById(R.id.item_categories)
         var _ivCatalogue: ImageView = itemView.findViewById(R.id.ivCatalogue)
+        val _ivLoveBTN = itemView.findViewById<ImageView>(R.id.ivLoveBTN)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -32,6 +33,13 @@ class AdapterCatalogue(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val catalogue = listCatalogue[position]
+        //cek love
+        if(catalogue.love == true){
+            holder._ivLoveBTN.setImageResource(R.drawable.filledheart)
+        }
+        else{
+            holder._ivLoveBTN.setImageResource(R.drawable.unfilledheart)
+        }
 
         holder._tvName.text = catalogue.name
         holder._tvCategories.text = catalogue.categories

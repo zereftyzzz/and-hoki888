@@ -50,7 +50,9 @@ class DetCatalogue2 : AppCompatActivity() {
                         documentSnapshot.getString("image") ?: "",
                         documentSnapshot.getString("name") ?: "",
                         documentSnapshot.getString("categories") ?: "",
-                        documentSnapshot.getString("desc") ?: ""
+                        documentSnapshot.getString("desc") ?: "",
+                        documentSnapshot.getBoolean("love") ?: false
+
                     )
 
                     // Populate views with retrieved data

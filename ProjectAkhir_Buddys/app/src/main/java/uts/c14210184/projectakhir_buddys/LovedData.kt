@@ -9,6 +9,6 @@ data class LovedData(
     var name: String,
     var categories: String,
     var desc: String,
-    var loved: String,
+    var loved: Boolean,
     var username: String
 ) : Parcelable

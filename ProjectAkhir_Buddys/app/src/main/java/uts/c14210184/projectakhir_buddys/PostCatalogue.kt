@@ -45,7 +45,8 @@ class PostCatalogue : AppCompatActivity() {
             val newCategories = _etCategories.text.toString()
             val newDescription = _etDescription.text.toString()
             val Image = _etImage.text.toString()
-            TambahData(Title, newDescription, newCategories, Image,pass_name)
+            val love = false
+            TambahData(Title, newDescription, newCategories, Image,pass_name,love)
         }
 
 
@@ -59,19 +60,19 @@ class PostCatalogue : AppCompatActivity() {
 //        _etCategories.setText(dataIntent!!.categories)
 //        _etDescription.setText(dataIntent!!.desc)
     }
-    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String) {
-        val dataBaru = CatalogueData(Image, Name, Categories, Description)
+    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String, love:Boolean) {
+        val dataBaru = CatalogueData(Image, Name, Categories, Description,love)
 
         db.collection("catalogue")
             .document(Name)
             .set(dataBaru)
             .addOnSuccessListener {
                 Toast.makeText(
-                    this@PostCatalogue,
+                    this,
                     "Data Berhasil disimpan",
                     Toast.LENGTH_SHORT
                 ).show()
-                val intent = Intent(this@PostCatalogue, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("userName", username)
                 intent.putExtra("kirimData", dataBaru)
                 startActivity(intent)

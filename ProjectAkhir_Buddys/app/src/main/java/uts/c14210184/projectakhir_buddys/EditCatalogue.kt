@@ -49,7 +49,8 @@ class EditCatalogue : AppCompatActivity() {
             val newCategories = _etCategories.text.toString()
             val newDescription = _etDescription.text.toString()
             val Image = dataIntent?.image.toString()
-            TambahData(Title, newDescription, newCategories, Image,pass_name,pass_gambar)
+            val loved = dataIntent?.love
+            TambahData(Title, newDescription, newCategories, Image,pass_name,pass_gambar,loved)
         }
 
 
@@ -63,8 +64,8 @@ class EditCatalogue : AppCompatActivity() {
         _etCategories.setText(dataIntent!!.categories)
         _etDescription.setText(dataIntent!!.desc)
     }
-    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String, gambar:String) {
-        val dataBaru = CatalogueData(Image, Name, Categories, Description)
+    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String, gambar:String, Loved:Boolean?) {
+        val dataBaru = CatalogueData(Image, Name, Categories, Description,Loved)
 
         db.collection("catalogue")
             .document(Name)

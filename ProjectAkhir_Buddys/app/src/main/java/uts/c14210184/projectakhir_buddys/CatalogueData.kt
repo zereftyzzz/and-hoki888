@@ -8,5 +8,6 @@ data class CatalogueData(
     var image: String,
     var name: String,
     var categories: String,
-    var desc: String
+    var desc: String,
+    var love: Boolean?
 ) : Parcelable

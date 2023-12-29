@@ -15,7 +15,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
+import com.google.firebase.firestore.firestore
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -26,6 +29,8 @@ class Catalogue : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private var dataCatalogue = ArrayList<CatalogueData>()
     private lateinit var _rvCatalogue: RecyclerView
+    val db2 = Firebase.firestore
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +53,8 @@ class Catalogue : Fragment() {
         _rvCatalogue.layoutManager = LinearLayoutManager(requireContext())
         val _ivTambah = view.findViewById<ImageView>(R.id.ivTambah)
         val _ivLoved = view.findViewById<ImageView>(R.id.ivLoved)
+        val _ivLoveBTN = view.findViewById<ImageView>(R.id.ivLoveBTN)
+
 
         val mainActivity = activity as? MainActivity
         val admin = mainActivity?.admin
@@ -57,9 +64,16 @@ class Catalogue : Fragment() {
         if(admin == false){
             _ivTambah.visibility = View.INVISIBLE
         }
+        //ivLoved == page fav
         _ivLoved.setOnClickListener {
-            //ke page loved
+
         }
+        //ivLoveBTN == button
+//        _ivLoveBTN.setOnClickListener {
+//            println("TEST")
+//        }
+
+
         _ivTambah.setOnClickListener {
             val intent = Intent(activity, PostCatalogue::class.java)
             val article = false
@@ -84,7 +98,8 @@ class Catalogue : Fragment() {
                         document.getString("image") ?: "",
                         document.getString("name") ?: "",
                         document.getString("categories") ?: "",
-                        document.getString("desc") ?: ""
+                        document.getString("desc") ?: "",
+                        document.getBoolean("love") ?: false
                     )
                     dataCatalogue.add(catalogueData)
                 }
@@ -133,4 +148,33 @@ class Catalogue : Fragment() {
                 }
             }
     }
+//    fun TambahData(Name: String, Description: String, Categories: String, Image: String, Loved: String, Username:String) {
+//        val dataBaru = LovedData(Image, Name, Categories, Description, Loved, Username)
+//
+//        db2.collection("loved")
+//            .document(Name)
+//            .set(dataBaru)
+//            .addOnSuccessListener {
+////                Toast.makeText(
+////                    this,
+////                    "Data Berhasil disimpan",
+////                    Toast.LENGTH_SHORT
+////                ).show()
+////                val intent = Intent(this, MainActivity::class.java)
+////                intent.putExtra("userName", username)
+////                intent.putExtra("kirimData", dataBaru)
+////                startActivity(intent)
+//            }
+//            .addOnFailureListener { e ->
+//                Log.w(
+//                    "PROJ_DMFIREBASE",
+//                    "Error adding document",
+//                    e
+//                )
+//            }
+//    }
+
 }
+
+
+
