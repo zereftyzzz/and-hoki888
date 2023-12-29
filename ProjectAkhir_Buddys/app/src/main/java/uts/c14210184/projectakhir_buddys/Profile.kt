@@ -75,6 +75,7 @@ class Profile : Fragment() {
 
     private fun readData() {
         db.collection("article")
+//            hanya mengambil artikel yang sesuai nama user
             .whereEqualTo("author", name)
             .get()
             .addOnSuccessListener { result ->
@@ -109,6 +110,7 @@ class Profile : Fragment() {
             }
     }
 
+//    refresh data setelah delete artikel
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 123 && resultCode == Activity.RESULT_OK) {
