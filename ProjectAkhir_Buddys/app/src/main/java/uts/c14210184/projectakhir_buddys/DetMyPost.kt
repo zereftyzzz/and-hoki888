@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -12,12 +13,10 @@ import com.squareup.picasso.Picasso
 
 class DetMyPost : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
-    private lateinit var adapter: AdapterArticle // Define adapter at the class level
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_det_my_post)
-        val name = intent.getStringExtra("userName")
 
         var _tvTitle= findViewById<TextView>(R.id.tvDetTitle)
         var _tvDesc= findViewById<TextView>(R.id.tvDetDesc)
@@ -28,14 +27,13 @@ class DetMyPost : AppCompatActivity() {
         val dataIntent = intent.getParcelableExtra<ArticleData>("kirimData")
 
         Picasso.get().load(dataIntent?.image).into(_ivArticle)
-        _tvTitle.setText(dataIntent?.title)
-        _tvDesc.setText(dataIntent?.description)
+        _tvTitle.text = dataIntent?.title
+        _tvDesc.text = dataIntent?.description
 
         _btnDel.setOnClickListener {
             dataIntent?.title?.let { articleTitle ->
                 deleteArticle(articleTitle)
             }
-            finish()
         }
         _ivBackDetPost.setOnClickListener {
             onBackPressed()
@@ -50,10 +48,16 @@ class DetMyPost : AppCompatActivity() {
                 for (document in documents) {
                     document.reference.delete()
                 }
+                Toast.makeText(this, "Deletion successful", Toast.LENGTH_SHORT).show()
+                val resultIntent = Intent().apply {
+                    putExtra("refreshData", true)
+                }
+                setResult(RESULT_OK, resultIntent)
+                finish()
             }
             .addOnFailureListener { exception ->
                 exception.printStackTrace()
+                Toast.makeText(this, "Deletion failed: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
     }
-
 }

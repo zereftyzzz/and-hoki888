@@ -1,5 +1,6 @@
 package uts.c14210184.projectakhir_buddys
 
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -37,40 +38,41 @@ class Profile : Fragment() {
         }
     }
 
-override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val mFragmentManager : FragmentManager = parentFragmentManager
-    val mainActivity = activity as? MainActivity
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val mFragmentManager : FragmentManager = parentFragmentManager
+        val mainActivity = activity as? MainActivity
 
-    val userName = mainActivity?.userName
-    name = userName
-    val defaultImageUrl = mainActivity?.defaultImageUrl
+        val userName = mainActivity?.userName
+        name = userName
+        val defaultImageUrl = mainActivity?.defaultImageUrl
 
-    val _tvName = view.findViewById<TextView>(R.id.tvName)
-    val _ivImage = view.findViewById<ImageView>(R.id.ivImage)
+        val _tvName = view.findViewById<TextView>(R.id.tvName)
+        val _ivImage = view.findViewById<ImageView>(R.id.ivImage)
 
-    Picasso.get().load(defaultImageUrl).into(_ivImage)
-    _tvName.text = userName
+        Picasso.get().load(defaultImageUrl).into(_ivImage)
+        _tvName.text = userName
 
+        // Ke Fragment EditProfile
+        val _btnEdit = view.findViewById<Button>(R.id.btnEdit)
+        _btnEdit.setOnClickListener{
+            val mEdit = EditProfile()
+            val bundle = Bundle().apply { }
+            mEdit.arguments = bundle
 
-    val _btnEdit = view.findViewById<Button>(R.id.btnEdit)
-    _btnEdit.setOnClickListener{
-        val mEdit = EditProfile()
-        val bundle = Bundle().apply {
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mEdit, EditProfile::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
         }
-        mEdit.arguments = bundle
-        mFragmentManager.beginTransaction().apply {
-            replace(R.id.frameContainer, mEdit, EditProfile::class.java.simpleName)
-            addToBackStack(null)
-            commit()
-        }
+
+        _rvMyPost = view.findViewById(R.id.rvMyPost)
+        _rvMyPost.layoutManager = LinearLayoutManager(requireContext())
+
+        readData()
     }
 
-    _rvMyPost = view.findViewById(R.id.rvMyPost)
-    _rvMyPost.layoutManager = LinearLayoutManager(requireContext())
-
-    readData()
-}
     private fun readData() {
         db.collection("article")
             .whereEqualTo("author", name)
@@ -94,9 +96,9 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
                 _rvMyPost.layoutManager = layoutManager
 
                 val adapter = AdapterArticle(dataArticle) { data ->
-                    val intent = Intent(activity, DetMyPost::class.java)
+                    val intent = Intent(requireActivity(), DetMyPost::class.java)
                     intent.putExtra("kirimData", data)
-                    startActivity(intent)
+                    startActivityForResult(intent, 123)
                 }
 
                 _rvMyPost.adapter = adapter
@@ -107,11 +109,20 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 123 && resultCode == Activity.RESULT_OK) {
+            val shouldRefresh = data?.getBooleanExtra("refreshData", false) ?: false
+            if (shouldRefresh) {
+                readData() // Refresh data when the deletion is successful
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
