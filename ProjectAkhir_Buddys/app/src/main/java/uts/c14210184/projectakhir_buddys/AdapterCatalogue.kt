@@ -14,8 +14,8 @@ class AdapterCatalogue(
     private val onItemClickCallback: (CatalogueData) -> Unit
 ) : RecyclerView.Adapter<AdapterCatalogue.ListViewHolder>() {
     var username: String? = null
-    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var _tvName: TextView = itemView.findViewById(R.id.item_name)
         var _tvCategories: TextView = itemView.findViewById(R.id.item_categories)
         var _ivCatalogue: ImageView = itemView.findViewById(R.id.ivCatalogue)
@@ -35,23 +35,12 @@ class AdapterCatalogue(
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val catalogue = listCatalogue[position]
 
-        //cek username
-        val usernameExists = catalogue.love?.contains(username)
-        if (usernameExists == false) {
-            holder._ivLoveBTN.setImageResource(R.drawable.unfilledheart)
-        } else {
+        val isLoved = catalogue.love?.contains(username) == true
+        if (isLoved) {
             holder._ivLoveBTN.setImageResource(R.drawable.filledheart)
-
+        } else {
+            holder._ivLoveBTN.setImageResource(R.drawable.unfilledheart)
         }
-
-
-//        //cek love
-//        if(lovetrue){
-//            holder._ivLoveBTN.setImageResource(R.drawable.filledheart)
-//        }
-//        else{
-//            holder._ivLoveBTN.setImageResource(R.drawable.unfilledheart)
-//        }
 
         holder._tvName.text = catalogue.name
         holder._tvCategories.text = catalogue.categories
@@ -65,8 +54,23 @@ class AdapterCatalogue(
             holder._ivCatalogue.setImageResource(R.drawable.bajup)
         }
 
+        holder._ivLoveBTN.setOnClickListener {
+            // Update Firebase based on love status
+            if (isLoved) {
+                // Remove username from love ArrayList in Firebase
+                catalogue.removeLove(username,catalogue.name)
+            } else {
+                // Add username to love ArrayList in Firebase
+                catalogue.addLove(username,catalogue.name)
+            }
+
+            // Notify data change
+            notifyItemChanged(position)
+        }
+
         holder.itemView.setOnClickListener {
             onItemClickCallback.invoke(listCatalogue[position])
         }
     }
+
 }
