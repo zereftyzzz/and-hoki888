@@ -64,14 +64,15 @@ class Catalogue : Fragment() {
             _ivTambah.visibility = View.INVISIBLE
         }
         //ivLoved == page fav
-//        _ivLoved.setOnClickListener {
-//            val intent = Intent(activity, CatalogueLoved::class.java)
-//            val article = false
-//            intent.putExtra("article_back",article)
-//            intent.putExtra("userName", username)
-//            intent.putExtra("Gambar", gambar)
-//            startActivity(intent)
-//        }
+        _ivLoved.setOnClickListener {
+            val intent = Intent(activity, CatalogueLoved::class.java)
+            val article = false
+            intent.putExtra("article_back",article)
+            intent.putExtra("userName", username)
+            intent.putExtra("Gambar", gambar)
+            intent.putExtra("admin", admin)
+            startActivity(intent)
+        }
 
 
         _ivTambah.setOnClickListener {
@@ -111,24 +112,24 @@ class Catalogue : Fragment() {
 
                 val adapter: AdapterCatalogue =
                     if (admin == true) {
-                    AdapterCatalogue(dataCatalogue) { data ->
-                        val intent = Intent(activity, DetCatalogue::class.java)
-                        intent.putExtra("userName", username)
-                        intent.putExtra("kirimData", data)
-                        intent.putExtra("Gambar", gambar)
+                        AdapterCatalogue(dataCatalogue) { data ->
+                            val intent = Intent(activity, DetCatalogue::class.java)
+                            intent.putExtra("userName", username)
+                            intent.putExtra("kirimData", data)
+                            intent.putExtra("Gambar", gambar)
 
-                        startActivity(intent)
-                    }
-                } else {
-                    AdapterCatalogue(dataCatalogue) { data ->
-                        val intent = Intent(activity, DetCatalogue2::class.java)
-                        intent.putExtra("userName", username)
-                        intent.putExtra("kirimData", data)
-                        intent.putExtra("Gambar", gambar)
+                            startActivity(intent)
+                        }
+                    } else {
+                        AdapterCatalogue(dataCatalogue) { data ->
+                            val intent = Intent(activity, DetCatalogue2::class.java)
+                            intent.putExtra("userName", username)
+                            intent.putExtra("kirimData", data)
+                            intent.putExtra("Gambar", gambar)
 
-                        startActivity(intent)
+                            startActivity(intent)
+                        }
                     }
-                }
 
                 adapter.username = username
                 _rvCatalogue.adapter = adapter
@@ -149,33 +150,7 @@ class Catalogue : Fragment() {
                 }
             }
     }
-//    fun TambahData(Name: String, Description: String, Categories: String, Image: String, Loved: String, Username:String) {
-//        val dataBaru = LovedData(Image, Name, Categories, Description, Loved, Username)
-//
-//        db2.collection("loved")
-//            .document(Name)
-//            .set(dataBaru)
-//            .addOnSuccessListener {
-////                Toast.makeText(
-////                    this,
-////                    "Data Berhasil disimpan",
-////                    Toast.LENGTH_SHORT
-////                ).show()
-////                val intent = Intent(this, MainActivity::class.java)
-////                intent.putExtra("userName", username)
-////                intent.putExtra("kirimData", dataBaru)
-////                startActivity(intent)
-//            }
-//            .addOnFailureListener { e ->
-//                Log.w(
-//                    "PROJ_DMFIREBASE",
-//                    "Error adding document",
-//                    e
-//                )
-//            }
-//    }
 
 }
-
 
 
