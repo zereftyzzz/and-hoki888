@@ -86,7 +86,8 @@ class Profile : Fragment() {
                         document.getString("description") ?: "",
                         document.getString("image") ?: "",
                         document.getString("title") ?: "",
-                        (document.getLong("view") ?: 0).toInt()
+                        (document.getLong("view") ?: 0).toInt(),
+                        document.get("love") as? ArrayList<String> ?: ArrayList()
                     )
                     dataArticle.add(articleData)
                 }

@@ -34,6 +34,7 @@ class PostArticle : Fragment() {
         val mFragmentManager : FragmentManager = parentFragmentManager
         val mainActivity = activity as? MainActivity
         val userName = mainActivity?.userName
+        val love: ArrayList<String> = ArrayList()
 
         val _btnArticle = view.findViewById<Button>(R.id.btnPost)
         _etTitle = view.findViewById<EditText>(R.id.etTitle)
@@ -47,7 +48,8 @@ class PostArticle : Fragment() {
                 _etTitle.text.toString(),
                 _etDesc.text.toString(),
                 userName.toString(),
-                _etImage.text.toString()
+                _etImage.text.toString(),
+                love
             )
             val mArticle = Article()
             val mFragmentManager : FragmentManager = parentFragmentManager
@@ -61,9 +63,9 @@ class PostArticle : Fragment() {
     }
 
 //    add article
-    fun TambahData(Title : String, Description : String, Author: String, Image: String){
+    fun TambahData(Title : String, Description : String, Author: String, Image: String,Loved: ArrayList<String>?){
         var View = Random.nextInt(20,900)  // menentukan jumlah view menggunakan function random
-        val dataBaru = ArticleData(Author, Description, Image, Title, View) // menambah data baru menggunakan data dr editText
+        val dataBaru = ArticleData(Author, Description, Image, Title, View,Loved ?: ArrayList()) // menambah data baru menggunakan data dr editText
         db.collection("article")
             .document(Title)
             .set(dataBaru)

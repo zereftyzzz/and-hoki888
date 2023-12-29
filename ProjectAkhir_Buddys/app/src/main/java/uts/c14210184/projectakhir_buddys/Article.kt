@@ -64,7 +64,9 @@ class Article : Fragment() {
                         document.getString("description") ?: "",
                         document.getString("image") ?: "",
                         document.getString("title") ?: "",
-                        (document.getLong("view") ?: 0).toInt()
+                        (document.getLong("view") ?: 0).toInt(),
+                        document.get("love") as? ArrayList<String> ?: ArrayList()
+
                     )
                     dataArticle.add(articleData)
                 }
@@ -83,6 +85,7 @@ class Article : Fragment() {
                 }
 
                 _rvArticle.adapter = adapter
+                adapter.username = username
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)

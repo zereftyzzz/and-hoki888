@@ -82,5 +82,15 @@
         app:layout_constraintStart_toEndOf="@+id/tvView"
         app:layout_constraintTop_toTopOf="@+id/tvView" />
 
+    <ImageView
+        android:id="@+id/_ivLovedABTN"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBg"
+        app:layout_constraintEnd_toEndOf="@+id/ivBg"
+        app:srcCompat="@drawable/unfilledheart" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
