@@ -40,12 +40,6 @@ data class ArticleData(
         val db = Firebase.firestore
         val documentReference = db.collection("article").document(name ?: "")
         documentReference.update("love", love)
-            .addOnSuccessListener {
-                // Success message or any additional logic upon successful update
-            }
-            .addOnFailureListener { e ->
-                // Handle failure: Log the error or show a message
-            }
     }
 }
 

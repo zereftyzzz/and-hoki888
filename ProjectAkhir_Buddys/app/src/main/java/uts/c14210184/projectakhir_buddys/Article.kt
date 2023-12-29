@@ -51,8 +51,10 @@ class Article : Fragment() {
         val gambar = mainActivity?.defaultImageUrl
         readData(username,gambar)
 
+        //        button untuk ke page Article loved
         val _ivLoved = view.findViewById<ImageView>(R.id.ivLoved)
 
+        //ivLoved => page fav
         _ivLoved.setOnClickListener {
             val intent = Intent(activity, ArticleLoved::class.java)
             val article = false

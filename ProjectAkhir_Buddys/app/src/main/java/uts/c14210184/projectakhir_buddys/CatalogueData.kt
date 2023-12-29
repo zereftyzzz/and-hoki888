@@ -1,6 +1,7 @@
 package uts.c14210184.projectakhir_buddys
 
 import android.os.Parcelable
+import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import kotlinx.parcelize.Parcelize
@@ -13,8 +14,6 @@ data class CatalogueData(
     var desc: String,
     var love: ArrayList<String>
 ) : Parcelable {
-    // Other existing functions...
-
     fun addLove(username: String?, name: String?) {
         username?.let {
             if (!love.contains(username)) {
@@ -35,12 +34,6 @@ data class CatalogueData(
         val db = Firebase.firestore
         val documentReference = db.collection("catalogue").document(name ?: "")
         documentReference.update("love", love)
-            .addOnSuccessListener {
-                // Success message or any additional logic upon successful update
-            }
-            .addOnFailureListener { e ->
-                // Handle failure: Log the error or show a message
-            }
     }
 
 }

@@ -51,8 +51,8 @@ class Catalogue : Fragment() {
         _rvCatalogue = view.findViewById(R.id.rvCatalogue)
         _rvCatalogue.layoutManager = LinearLayoutManager(requireContext())
         val _ivTambah = view.findViewById<ImageView>(R.id.ivTambah)
+//        button untuk ke page Catalogue loved
         val _ivLoved = view.findViewById<ImageView>(R.id.ivLoved)
-        val _ivLoveBTN = view.findViewById<ImageView>(R.id.ivLoveBTN)
 
 
         val mainActivity = activity as? MainActivity
@@ -64,13 +64,13 @@ class Catalogue : Fragment() {
             _ivTambah.visibility = View.INVISIBLE
         }
 
-        //ivLoved == page fav
+        //ivLoved => page fav
         _ivLoved.setOnClickListener {
             val intent = Intent(activity, CatalogueLoved::class.java)
             val article = false
-            intent.putExtra("article_back",article)
-            intent.putExtra("userName", username)
-            intent.putExtra("Gambar", gambar)
+            intent.putExtra("article_back",article) //default page
+            intent.putExtra("userName", username) //user name
+            intent.putExtra("Gambar", gambar) //user profile image
             startActivity(intent)
         }
 

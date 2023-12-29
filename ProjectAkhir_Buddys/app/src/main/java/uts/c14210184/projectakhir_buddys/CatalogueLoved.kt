@@ -31,8 +31,7 @@ class CatalogueLoved : AppCompatActivity() {
         val name = intent.getStringExtra("userName")
         val gambar = intent.getStringExtra("Gambar")
 
-
-
+//        button back ke Catalogue
         _ivBack.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             val article = false
@@ -51,6 +50,7 @@ class CatalogueLoved : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 dataCatalogue.clear()
                 for (document in result) {
+//                    filter untuk menampilkan item yang di love saja
                     val loveList = document.get("love") as? ArrayList<String> ?: ArrayList()
                     if (username != null && loveList.contains(username)) {
                         val catalogueData = CatalogueData(
