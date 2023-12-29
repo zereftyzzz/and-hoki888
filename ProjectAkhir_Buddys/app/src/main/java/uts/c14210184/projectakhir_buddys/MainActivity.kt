@@ -15,17 +15,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //nama
         if (intent.getStringExtra("userName").isNullOrEmpty()){
             userName = "Guest"
         }
         else {
             userName = intent.getStringExtra("userName")
         }
-
+        //cek admin
         if (userName.toString().toUpperCase() == "ADMIN"){
             admin = true
         }
-
         //Gambar
         if (intent.getStringExtra("Gambar").isNullOrEmpty()){
             defaultImageUrl = "https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
@@ -33,9 +34,6 @@ class MainActivity : AppCompatActivity() {
         else {
             defaultImageUrl = intent.getStringExtra("Gambar")
         }
-
-
-
 
         val fragmentManager = supportFragmentManager
 

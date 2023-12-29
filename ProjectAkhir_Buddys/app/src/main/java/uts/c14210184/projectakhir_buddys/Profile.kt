@@ -53,15 +53,12 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     _tvName.text = userName
 
 
-    // Ke Fragment EditProfile
     val _btnEdit = view.findViewById<Button>(R.id.btnEdit)
     _btnEdit.setOnClickListener{
         val mEdit = EditProfile()
-        // Pass profileName to EditProfile fragment
         val bundle = Bundle().apply {
         }
         mEdit.arguments = bundle
-
         mFragmentManager.beginTransaction().apply {
             replace(R.id.frameContainer, mEdit, EditProfile::class.java.simpleName)
             addToBackStack(null)
