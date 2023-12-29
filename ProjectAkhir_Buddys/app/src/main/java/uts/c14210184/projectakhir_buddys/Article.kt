@@ -50,7 +50,19 @@ class Article : Fragment() {
         val username = mainActivity?.userName
         val gambar = mainActivity?.defaultImageUrl
         readData(username,gambar)
+
+        val _ivLoved = view.findViewById<ImageView>(R.id.ivLoved)
+
+        _ivLoved.setOnClickListener {
+            val intent = Intent(activity, ArticleLoved::class.java)
+            val article = false
+            intent.putExtra("article_back",article)
+            intent.putExtra("userName", username)
+            intent.putExtra("Gambar", gambar)
+            startActivity(intent)
+        }
     }
+
 
     private fun readData(username:String?,gambar:String?) {
         db.collection("article")

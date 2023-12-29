@@ -63,15 +63,16 @@ class Catalogue : Fragment() {
         if(admin == false){
             _ivTambah.visibility = View.INVISIBLE
         }
+
         //ivLoved == page fav
-//        _ivLoved.setOnClickListener {
-//            val intent = Intent(activity, CatalogueLoved::class.java)
-//            val article = false
-//            intent.putExtra("article_back",article)
-//            intent.putExtra("userName", username)
-//            intent.putExtra("Gambar", gambar)
-//            startActivity(intent)
-//        }
+        _ivLoved.setOnClickListener {
+            val intent = Intent(activity, CatalogueLoved::class.java)
+            val article = false
+            intent.putExtra("article_back",article)
+            intent.putExtra("userName", username)
+            intent.putExtra("Gambar", gambar)
+            startActivity(intent)
+        }
 
 
         _ivTambah.setOnClickListener {
