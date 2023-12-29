@@ -38,6 +38,8 @@ class DetCatalogue : AppCompatActivity() {
 
         _ivEdit.setOnClickListener {
             val intent = Intent(this, EditCatalogue::class.java)
+            val article = false
+            intent.putExtra("article_back",article)
             intent.putExtra("kirimData", dataIntent)
             intent.putExtra("userName", name)
             startActivity(intent)

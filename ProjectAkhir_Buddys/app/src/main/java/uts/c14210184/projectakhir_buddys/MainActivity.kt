@@ -65,9 +65,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         //back article
-        handleArticleLogic()
+        handleArticle()
     }
-    private fun handleArticleLogic() {
+    private fun handleArticle() {
         val article = intent.getBooleanExtra("article_back", false)
         if (article) {
             val bundle2 = Bundle()

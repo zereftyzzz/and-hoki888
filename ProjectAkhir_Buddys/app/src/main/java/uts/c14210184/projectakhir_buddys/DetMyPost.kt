@@ -17,11 +17,13 @@ class DetMyPost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_det_my_post)
+        val name = intent.getStringExtra("userName")
 
-        var _tvTitle: TextView = findViewById<TextView>(R.id.tvDetTitle)
-        var _tvDesc: TextView = findViewById<TextView>(R.id.tvDetDesc)
-        var _ivArticle: ImageView = findViewById<ImageView>(R.id.ivDetArt)
-        var _btnDel: Button = findViewById<Button>(R.id.btnDel)
+        var _tvTitle= findViewById<TextView>(R.id.tvDetTitle)
+        var _tvDesc= findViewById<TextView>(R.id.tvDetDesc)
+        var _ivArticle= findViewById<ImageView>(R.id.ivDetArt)
+        var _btnDel = findViewById<Button>(R.id.btnDel)
+        var _ivBackDetPost: ImageView = findViewById(R.id.ivBackDetPost)
 
         val dataIntent = intent.getParcelableExtra<ArticleData>("kirimData")
 
@@ -34,6 +36,9 @@ class DetMyPost : AppCompatActivity() {
                 deleteArticle(articleTitle)
             }
             finish()
+        }
+        _ivBackDetPost.setOnClickListener {
+            onBackPressed()
         }
     }
 
