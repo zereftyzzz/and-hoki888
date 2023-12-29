@@ -17,6 +17,8 @@ class DetCatalogue2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_det_catalogue2)
         val name = intent.getStringExtra("userName")
+        val gambar = intent.getStringExtra("Gambar")
+
 
 
         val _ivDetCatalogue = findViewById<ImageView>(R.id.ivDetCatalogue)
@@ -34,6 +36,7 @@ class DetCatalogue2 : AppCompatActivity() {
             val article = false
             intent.putExtra("article_back",article)
             intent.putExtra("userName", pass_name)
+            intent.putExtra("Gambar", gambar)
             startActivity(intent)
         }
 

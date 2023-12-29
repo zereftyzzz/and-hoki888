@@ -20,6 +20,8 @@ class EditCatalogue : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_catalogue)
         val name = intent.getStringExtra("userName")
+        val gambar = intent.getStringExtra("Gambar")
+
 
         val _ivDetCatalogue = findViewById<ImageView>(R.id.ivDetCatalogue)
         val _etDescription = findViewById<EditText>(R.id.etDescription)
@@ -36,16 +38,18 @@ class EditCatalogue : AppCompatActivity() {
             val article = false
             intent.putExtra("article_back",article)
             intent.putExtra("userName", pass_name)
+            intent.putExtra("Gambar", gambar)
             startActivity(intent)
         }
 
         _btSave.setOnClickListener {
             val pass_name = name.toString()
+            val pass_gambar = gambar.toString()
             val Title = _tvTitles.text.toString()
             val newCategories = _etCategories.text.toString()
             val newDescription = _etDescription.text.toString()
             val Image = dataIntent?.image.toString()
-            TambahData(Title, newDescription, newCategories, Image,pass_name)
+            TambahData(Title, newDescription, newCategories, Image,pass_name,pass_gambar)
         }
 
 
@@ -59,7 +63,7 @@ class EditCatalogue : AppCompatActivity() {
         _etCategories.setText(dataIntent!!.categories)
         _etDescription.setText(dataIntent!!.desc)
     }
-    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String) {
+    fun TambahData(Name: String, Description: String, Categories: String, Image: String, username:String, gambar:String) {
         val dataBaru = CatalogueData(Image, Name, Categories, Description)
 
         db.collection("catalogue")
@@ -76,6 +80,7 @@ class EditCatalogue : AppCompatActivity() {
                 intent.putExtra("article_back",article)
                 intent.putExtra("userName", username)
                 intent.putExtra("kirimData", dataBaru)
+                intent.putExtra("Gambar", gambar)
                 startActivity(intent)
             }
             .addOnFailureListener { e ->

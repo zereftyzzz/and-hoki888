@@ -26,6 +26,16 @@ class MainActivity : AppCompatActivity() {
             admin = true
         }
 
+        //Gambar
+        if (intent.getStringExtra("Gambar").isNullOrEmpty()){
+            defaultImageUrl = "https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
+        }
+        else {
+            defaultImageUrl = intent.getStringExtra("Gambar")
+        }
+
+
+
 
         val fragmentManager = supportFragmentManager
 

@@ -51,6 +51,7 @@ class Catalogue : Fragment() {
         val mainActivity = activity as? MainActivity
         val admin = mainActivity?.admin
         val username = mainActivity?.userName
+        val gambar = mainActivity?.defaultImageUrl
 
         if(admin == false){
             _ivTambah.visibility = View.INVISIBLE
@@ -61,15 +62,16 @@ class Catalogue : Fragment() {
             val article = false
             intent.putExtra("article_back",article)
             intent.putExtra("userName", username)
+            intent.putExtra("Gambar", gambar)
             startActivity(intent)
         }
 
-        readData(admin,username)
+        readData(admin,username,gambar)
     }
 
 
 
-    private fun readData(admin:Boolean?, username:String?) {
+    private fun readData(admin:Boolean?, username:String?, gambar:String?) {
         db.collection("catalogue")
             .get()
             .addOnSuccessListener { result ->
@@ -95,6 +97,8 @@ class Catalogue : Fragment() {
                         val intent = Intent(activity, DetCatalogue::class.java)
                         intent.putExtra("userName", username)
                         intent.putExtra("kirimData", data)
+                        intent.putExtra("Gambar", gambar)
+
                         startActivity(intent)
                     }
                 } else {
@@ -102,6 +106,8 @@ class Catalogue : Fragment() {
                         val intent = Intent(activity, DetCatalogue2::class.java)
                         intent.putExtra("userName", username)
                         intent.putExtra("kirimData", data)
+                        intent.putExtra("Gambar", gambar)
+
                         startActivity(intent)
                     }
                 }

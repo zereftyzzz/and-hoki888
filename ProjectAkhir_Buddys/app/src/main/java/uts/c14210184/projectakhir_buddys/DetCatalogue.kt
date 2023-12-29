@@ -17,6 +17,7 @@ class DetCatalogue : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_det_catalogue)
         val name = intent.getStringExtra("userName")
+        val gambar = intent.getStringExtra("Gambar")
 
         val _ivDetCatalogue = findViewById<ImageView>(R.id.ivDetCatalogue)
         val _tvDescription = findViewById<TextView>(R.id.etDescription)
@@ -33,6 +34,7 @@ class DetCatalogue : AppCompatActivity() {
             val article = false
             intent.putExtra("article_back",article)
             intent.putExtra("userName", name)
+            intent.putExtra("Gambar", gambar)
             startActivity(intent)
         }
 
@@ -42,6 +44,7 @@ class DetCatalogue : AppCompatActivity() {
             intent.putExtra("article_back",article)
             intent.putExtra("kirimData", dataIntent)
             intent.putExtra("userName", name)
+            intent.putExtra("Gambar", gambar)
             startActivity(intent)
         }
 
@@ -81,7 +84,7 @@ class DetCatalogue : AppCompatActivity() {
             }
             .addOnFailureListener { exception ->
                 Log.w("DetCatalogue", "Error getting document", exception)
-                Toast.makeText(this@DetCatalogue, "Failed to fetch data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to fetch data", Toast.LENGTH_SHORT).show()
             }
 
     }
@@ -93,10 +96,13 @@ class DetCatalogue : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     document.reference.delete()
+                    Toast.makeText(this, "Deletion successful", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
                 exception.printStackTrace()
+                Toast.makeText(this, "Deletion failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+
             }
     }
 

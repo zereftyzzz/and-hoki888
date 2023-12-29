@@ -44,13 +44,15 @@ class Article : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mainActivity = activity as? MainActivity
         _rvArticle = view.findViewById(R.id.rvArticle)
         _rvArticle.layoutManager = LinearLayoutManager(requireContext())
-
-        readData()
+        val username = mainActivity?.userName
+        val gambar = mainActivity?.defaultImageUrl
+        readData(username,gambar)
     }
 
-    private fun readData() {
+    private fun readData(username:String?,gambar:String?) {
         db.collection("article")
             .get()
             .addOnSuccessListener {
@@ -74,7 +76,9 @@ class Article : Fragment() {
 
                 val adapter = AdapterArticle(dataArticle) { data ->
                     val intent = Intent(activity, DetArticle::class.java)
+                    intent.putExtra("userName", username)
                     intent.putExtra("kirimData", data)
+                    intent.putExtra("Gambar", gambar)
                     startActivity(intent)
                 }
 
