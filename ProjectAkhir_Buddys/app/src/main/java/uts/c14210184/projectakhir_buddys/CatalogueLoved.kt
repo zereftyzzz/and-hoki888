@@ -70,7 +70,8 @@ class CatalogueLoved : AppCompatActivity() {
                         document.getString("image") ?: "",
                         document.getString("name") ?: "",
                         document.getString("categories") ?: "",
-                        document.getString("desc") ?: ""
+                        document.getString("desc") ?: "",
+                        document.getBoolean("love") ?: false
                     )
                     dataCatalogue.add(catalogueData)
                 }

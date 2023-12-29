@@ -66,7 +66,12 @@ class Catalogue : Fragment() {
         }
         //ivLoved == page fav
         _ivLoved.setOnClickListener {
-
+            val intent = Intent(activity, CatalogueLoved::class.java)
+            val article = false
+            intent.putExtra("article_back",article)
+            intent.putExtra("userName", username)
+            intent.putExtra("Gambar", gambar)
+            startActivity(intent)
         }
         //ivLoveBTN == button
 //        _ivLoveBTN.setOnClickListener {
